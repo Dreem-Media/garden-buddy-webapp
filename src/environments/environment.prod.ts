@@ -1,3 +1,4 @@
 export const environment = {
-  production: true
+  production: true,
+  apiUrl: 'http://api-greenfingers.dreemhosted.co.uk',
 };
