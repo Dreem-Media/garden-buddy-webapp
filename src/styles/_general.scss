@@ -1,0 +1,24 @@
+// GREEN FINGERS STYLES
+body {
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  margin: 0;
+}
+
+table {
+  width: 100%;
+}
+
+.text-white {
+  a {
+    color: white;
+  }
+}
+
+.icon--large {
+  font-size: 3.5rem;
+  width: 3.5rem;
+}
+
+.main-body {
+  min-height: calc(100vh - 48px - 79px);
+}

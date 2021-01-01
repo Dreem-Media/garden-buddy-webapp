@@ -1,7 +1,7 @@
 {
   "name": "garden-buddy-webapp",
   "short_name": "garden-buddy-webapp",
-  "theme_color": "#1976d2",
+  "theme_color": "#3f814b",
   "background_color": "#fafafa",
   "display": "standalone",
   "scope": "./",

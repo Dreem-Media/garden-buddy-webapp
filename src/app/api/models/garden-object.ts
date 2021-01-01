@@ -9,3 +9,5 @@ export interface GardenObject {
   name: string;
   owned_count?: number;
 }
+
+export class GardenObject implements GardenObject {}

@@ -1,0 +1,26 @@
+.user-task {
+  transition: 1s all;
+  background: rgba($primary, 0.1);
+
+  &--complete {
+    background: rgba($primary, 0.3);
+    text-decoration: line-through;
+  }
+
+  &--finished {
+    label {
+      margin-bottom: 0;
+    }
+  }
+
+  .mat-checkbox-inner-container {
+    width: 28px;
+    height: 28px;
+  }
+
+  mat-card-content {
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+}

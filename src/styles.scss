@@ -1,1 +1,94 @@
 /* You can add global styles to this file, and also import other style files */
+
+$primary: #3f814b;
+$dark-primary-text: #252525;
+$light-primary-text: white;
+
+@import "../node_modules/bootstrap/scss/functions";
+@import "../node_modules/bootstrap/scss/variables";
+@import "../node_modules/bootstrap/scss/mixins";
+@import "../node_modules/bootstrap/scss/reboot";
+@import "../node_modules/bootstrap/scss/grid";
+@import "../node_modules/bootstrap/scss/tables";
+@import "../node_modules/bootstrap/scss/forms";
+@import "../node_modules/bootstrap/scss/transitions";
+@import "../node_modules/bootstrap/scss/dropdown";
+@import "../node_modules/bootstrap/scss/input-group";
+@import "../node_modules/bootstrap/scss/custom-forms";
+@import "../node_modules/bootstrap/scss/breadcrumb";
+@import "../node_modules/bootstrap/scss/media";
+@import "../node_modules/bootstrap/scss/close";
+@import "../node_modules/bootstrap/scss/type";
+@import "../node_modules/bootstrap/scss/utilities";
+
+@import "~@angular/material/theming";
+@include mat-core();
+
+body {
+  --primary-color: $primary;
+  --primary-lighter-color: #c5d9c9;
+  --primary-darker-color: #296433;
+  --text-primary-color: #{$light-primary-text};
+  --text-primary-lighter-color: #{$dark-primary-text};
+  --text-primary-darker-color: #{$light-primary-text};
+}
+
+$mat-primary: (
+  main: $primary,
+  lighter: #c5d9c9,
+  darker: #296433,
+  200: $primary,
+  // For slide toggle,
+  contrast:
+    (
+      main: $light-primary-text,
+      lighter: $dark-primary-text,
+      darker: $light-primary-text,
+    ),
+);
+$theme-primary: mat-palette($mat-primary, main, lighter, darker);
+
+body {
+  --accent-color: #343434;
+  --accent-lighter-color: #c2c2c2;
+  --accent-darker-color: #212121;
+  --text-accent-color: #{$light-primary-text};
+  --text-accent-lighter-color: #{$dark-primary-text};
+  --text-accent-darker-color: #{$light-primary-text};
+}
+
+$mat-accent: (
+  main: #343434,
+  lighter: #c2c2c2,
+  darker: #212121,
+  200: #343434,
+  // For slide toggle,
+  contrast:
+    (
+      main: $light-primary-text,
+      lighter: $dark-primary-text,
+      darker: $light-primary-text,
+    ),
+);
+$theme-accent: mat-palette($mat-accent, main, lighter, darker);
+
+$mat-warn: (
+  main: #b83232,
+  lighter: #eac2c2,
+  darker: #a01f1f,
+  200: #b83232,
+  // For slide toggle,
+  contrast:
+    (
+      main: $light-primary-text,
+      lighter: $dark-primary-text,
+      darker: $light-primary-text,
+    ),
+);
+
+$theme-warn: mat-palette($mat-warn, main, lighter, darker);
+$gf-app-theme: mat-light-theme($theme-primary, $theme-accent, $theme-warn);
+@include angular-material-theme($gf-app-theme);
+
+// Green Fingers Style
+@import "styles/index";

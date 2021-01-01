@@ -1,6 +1,6 @@
 /* tslint:disable */
 /* eslint-disable */
-export class User {
+export interface User {
   email: string;
   firstName?: string;
   id?: string;
@@ -11,8 +11,8 @@ export class User {
   resetKeyTimestamp?: string;
   resetTimestamp?: string;
   roles?: Array<string>;
+}
 
-  constructor() {
-    this.email = '';
-  }
+export class User implements User {
+  constructor() {}
 }

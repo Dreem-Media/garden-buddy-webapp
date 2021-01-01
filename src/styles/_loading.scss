@@ -1,0 +1,51 @@
+.loading-spinner {
+  width: 2.5rem;
+  height: 2.5rem;
+  border: 4px solid rgba(0, 0, 0, 0.075);
+  border-top-color: $primary;
+  border-radius: 100%;
+  animation: spin 750ms infinite cubic-bezier(0.76, 0.26, 0.48, 0.75);
+  z-index: 400;
+
+  &:before {
+    content: ' ';
+    display: block;
+  }
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+
+.loading {
+  position: relative;
+  transition: all 300ms ease;
+
+  &>* {
+    transition: all 300ms ease;
+    filter: blur(3px);
+    opacity: 0.5;
+    pointer-events: none;
+  }
+
+  &:before {
+    @extend .loading-spinner;
+    content: ' ';
+    display: block;
+    position: absolute;
+    width: 35px;
+    height: 35px;
+    margin: 0;
+    left: 50%;
+    left: calc(50% - 17px);
+    top: 50%;
+    top: calc(50% - 17px);
+  }
+}
