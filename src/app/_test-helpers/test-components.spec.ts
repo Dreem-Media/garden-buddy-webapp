@@ -39,7 +39,7 @@ export class AuthenticationServiceStub {
     this.isResetModeSubject = new BehaviorSubject<boolean>(false);
     this.isResetMode = this.isResetModeSubject.asObservable();
   }
-  public get currentUserTokenValue(): User {
+  public get currentUserValue(): User {
     return this.currentUserTokenSubject.value;
   }
   addTokenToUserFromReset(user: User) {}

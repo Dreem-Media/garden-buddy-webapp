@@ -31,7 +31,7 @@ export class LoginRegisterComponent implements OnInit {
     private alerts: AlertsService,
     private apiUserService: UserManagementControllerService, 
   ) {
-    if (this.authenticationService.currentUserTokenValue) {
+    if (this.authenticationService.currentUserValue) {
       this.router.navigate(['/']);
     }
   }

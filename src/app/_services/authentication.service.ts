@@ -11,13 +11,12 @@ import { UserService } from './user.service';
 export class AuthenticationService {
   private currentUserSubject: BehaviorSubject<String>;
   public currentUser: Observable<String>;
-  public currentUserTokenValue: any;
 
   constructor(
     private userService: UserService,
     private apiUserService: UserManagementControllerService
   ) {
-    const sessionUser = localStorage.getItem('currentUser');
+    const sessionUser = localStorage.getItem('currentUserToken');
     this.currentUserSubject = new BehaviorSubject<String>(
       sessionUser && JSON.parse(sessionUser)
     );
@@ -35,7 +34,7 @@ export class AuthenticationService {
     return this.apiUserService.login(params).pipe(
       map((token) => {
         // store user details and jwt token in local storage to keep user logged in between page refreshes
-        sessionStorage.setItem('currentUser', JSON.stringify(token));
+        sessionStorage.setItem('currentUserToken', JSON.stringify(token));
         this.currentUserSubject.next(token.token!);
         this.apiUserService.printCurrentUser().subscribe((data) => {
           this.userService.currentUser = data as User;
@@ -47,7 +46,7 @@ export class AuthenticationService {
 
   logout() {
     // remove user from local storage to log user out
-    localStorage.removeItem('currentUser');
+    localStorage.removeItem('currentUserToken');
     this.userService.removeUser();
     this.currentUserSubject.next('');
   }
