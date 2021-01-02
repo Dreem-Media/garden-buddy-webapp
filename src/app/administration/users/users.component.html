@@ -1,0 +1,55 @@
+<div class="py-5">
+
+  <div class="d-flex ">
+    <h1 class="h1 my-0">Edit Users</h1>
+    <div class="ml-auto">
+      <button mat-raised-button color="primary" (click)="addNewUser()">Add New</button>
+    </div>
+  </div>
+
+  <mat-form-field class="w-100">
+    <mat-icon matPrefix class="mr-3" [inline]="true">search</mat-icon>
+    <input matInput type="search" placeholder="Search for a user" class="search-input" [(ngModel)]="searchTerm"
+      (keydown.enter)="searchForUser()">
+    <button matSuffix mat-button class="ml-1" (click)="searchForUser()">Search</button>
+    <button mat-icon-button matSuffix class="mr-3" (click)="searchTerm = ''; searchForUser()" *ngIf="searchTerm">
+      <mat-icon>clear</mat-icon>
+    </button>
+  </mat-form-field>
+
+  <table mat-table [dataSource]="users" [class.loading]="loadingService.loading">
+
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef>Name</th>
+      <td mat-cell *matCellDef="let element"> {{element.firstName + ' ' + element.lastName}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="email">
+      <th mat-header-cell *matHeaderCellDef>Email</th>
+      <td mat-cell *matCellDef="let element"> {{element.email}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="roles">
+      <th mat-header-cell *matHeaderCellDef>Roles</th>
+      <td mat-cell *matCellDef="let element"> {{element.roles}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="edit">
+      <th mat-header-cell *matHeaderCellDef class="text-right">Actions</th>
+      <td mat-cell *matCellDef="let element" class="text-right">
+        <button mat-mini-fab color="warn" aria-label="Delete" class="mr-2" (click)="openDeleteDialog(element)">
+          <mat-icon>delete</mat-icon>
+        </button>
+        <a mat-mini-fab color="primary" aria-label="Edit" routerLink="{{element.id}}">
+          <mat-icon>edit</mat-icon>
+        </a>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+
+  <mat-paginator [pageSize]="25" [length]="userCount" (page)="updatePage($event)"></mat-paginator>
+
+</div>
