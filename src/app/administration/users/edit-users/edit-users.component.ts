@@ -1,51 +1,59 @@
-import { Component, OnInit } from "@angular/core";
-import { ActivatedRoute } from "@angular/router";
-import { Location } from "@angular/common";
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { Location } from '@angular/common';
 
-import { User, typesOfRoles } from "src/app/_models/user";
-import { AlertsService } from "src/app/_services/alerts.service";
-import { UserService } from "src/app/_services/user.service";
+import { AlertsService } from 'src/app/_services/alerts.service';
+import { typesOfRoles } from 'src/app/types-of-roles';
+import { User } from 'src/app/api/models/user';
+import { UserManagementControllerService } from 'src/app/api/services';
+import { NewUser } from 'src/app/api/models/new-user';
 
 @Component({
-  selector: "app-edit-users",
-  templateUrl: "./edit-users.component.html",
+  selector: 'app-edit-users',
+  templateUrl: './edit-users.component.html',
 })
 export class EditUsersComponent implements OnInit {
-  public currentlyEditing!: User;
+  public currentlyEditing!: NewUser;
   public typesOfRoles = typesOfRoles;
 
   constructor(
     private route: ActivatedRoute,
-    private service: UserService,
+    private apiUserService: UserManagementControllerService,
     private location: Location,
     private alerts: AlertsService
   ) {}
 
   ngOnInit() {
-    const id = this.route.snapshot.paramMap.get("user-id");
-    if (id){
-      if (id === "new") {
-        this.currentlyEditing = new User();
+    const userId = this.route.snapshot.paramMap.get('user-id');
+    if (userId) {
+      if (userId === 'new') {
+        this.currentlyEditing = new NewUser();
       } else {
-        this.service
-          .getUserById(id)
-          .subscribe((data: User) => (this.currentlyEditing = data));
+        this.apiUserService
+          .findById({ userId })
+          .subscribe((data: User) => (this.currentlyEditing = data as NewUser));
       }
     }
   }
 
   saveCurrentlyEditing(): void {
     if (this.currentlyEditing.id) {
-      this.service
-        .updateUserById(this.currentlyEditing.id, this.currentlyEditing)
-        .subscribe(() => {
-          this.alerts.sendMessage("Deleted");
-        });
-    } else {
-      this.service.createUser(this.currentlyEditing).subscribe((data: User) => {
-        this.alerts.sendMessage("Deleted");
-        this.currentlyEditing = data;
+      const params = {
+        userId: this.currentlyEditing.id,
+        body: this.currentlyEditing,
+      };
+      this.apiUserService.set(params).subscribe(() => {
+        this.alerts.sendMessage('Deleted');
       });
+    } else {
+      // TODO: Change
+      (this.currentlyEditing as NewUser).password = '';
+      this.apiUserService
+        .create({ body: this.currentlyEditing as NewUser })
+        .subscribe((data: User) => {
+          this.alerts.sendMessage('Deleted');
+          this.currentlyEditing = data as NewUser;
+        });
     }
   }
 

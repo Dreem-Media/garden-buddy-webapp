@@ -4,14 +4,13 @@ import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatTableDataSource, MatTable } from '@angular/material/table';
 import { Router } from '@angular/router';
 
-import { User } from 'src/app/_models/user';
-
 import { ConfirmationDialogComponent } from 'src/app/core/confirmation-dialog/confirmation-dialog.component';
 import { ConfirmType } from 'src/app/core/confirmation-dialog/confirmation-type.model';
 import { UserService } from 'src/app/_services/user.service';
 import { AlertsService } from 'src/app/_services/alerts.service';
 import { LoadingService } from 'src/app/_services/loading.service';
 import { UserManagementControllerService } from 'src/app/api/services';
+import { User } from 'src/app/api/models/user';
 
 
 @Component({
@@ -30,7 +29,6 @@ export class UsersComponent implements OnInit {
   public searchTerm = '';
 
   constructor(
-    private service: UserService,
     private apiUserService: UserManagementControllerService,
     public dialog: MatDialog,
     public router: Router,
@@ -72,7 +70,8 @@ export class UsersComponent implements OnInit {
     });
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        this.apiUserService.deleteUserById(element.id).subscribe(() => {
+        const id = element.id!;
+        this.apiUserService.deleteById({id}).subscribe(() => {
           this.alerts.sendMessage('Deleted');
           this.updatePage({ pageIndex: 0, pageSize: 25, length: 0 });
         });
