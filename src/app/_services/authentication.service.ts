@@ -4,44 +4,51 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { User } from '../api/models';
+import { UserManagementControllerService } from '../api/services/user-management-controller.service';
+import { UserService } from './user.service';
 
 @Injectable({ providedIn: 'root' })
 export class AuthenticationService {
-  private currentUserSubject: BehaviorSubject<User>;
-  public currentUser: Observable<User>;
+  private currentUserSubject: BehaviorSubject<String>;
+  public currentUser: Observable<String>;
   public currentUserTokenValue: any;
 
-  constructor(private http: HttpClient) {
+  constructor(
+    private userService: UserService,
+    private apiUserService: UserManagementControllerService
+  ) {
     const sessionUser = localStorage.getItem('currentUser');
-    this.currentUserSubject = new BehaviorSubject<User>(
+    this.currentUserSubject = new BehaviorSubject<String>(
       sessionUser && JSON.parse(sessionUser)
     );
     this.currentUser = this.currentUserSubject.asObservable();
   }
 
-  public get currentUserValue(): User {
+  public get currentUserValue(): String {
     return this.currentUserSubject.value;
   }
 
-  login(username: string, password: string) {
-    return this.http
-      .post<any>(`${environment.apiUrl}/users/authenticate`, {
-        username,
-        password,
+  login(email: string, password: string) {
+    const params = {
+      body: { email, password },
+    };
+    return this.apiUserService.login(params).pipe(
+      map((token) => {
+        // store user details and jwt token in local storage to keep user logged in between page refreshes
+        sessionStorage.setItem('currentUser', JSON.stringify(token));
+        this.currentUserSubject.next(token.token!);
+        this.apiUserService.printCurrentUser().subscribe((data) => {
+          this.userService.currentUser = data as User;
+          return data;
+        });
       })
-      .pipe(
-        map((user) => {
-          // store user details and jwt token in local storage to keep user logged in between page refreshes
-          localStorage.setItem('currentUser', JSON.stringify(user));
-          this.currentUserSubject.next(user);
-          return user;
-        })
-      );
+    );
   }
 
   logout() {
     // remove user from local storage to log user out
     localStorage.removeItem('currentUser');
-    this.currentUserSubject.next(new User());
+    this.userService.removeUser();
+    this.currentUserSubject.next('');
   }
 }

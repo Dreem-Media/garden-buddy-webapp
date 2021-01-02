@@ -21,14 +21,18 @@ import { HeaderComponent } from './core/header/header.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ConfirmationDialogComponent } from './core/confirmation-dialog/confirmation-dialog.component';
 import { ErrorComponent } from './core/error/error.component';
+import { LoginRegisterComponent } from './core/login-register/login-register.component';
+import { WelcomeComponent } from './core/welcome/welcome.component';
 
 @NgModule({
   declarations: [
     AppComponent,
+    LoginRegisterComponent,
     HeaderComponent,
-    FooterComponent,
     ErrorComponent,
     ConfirmationDialogComponent,
+    WelcomeComponent,
+    FooterComponent,
   ],
   imports: [
     BrowserModule,
@@ -40,7 +44,6 @@ import { ErrorComponent } from './core/error/error.component';
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-
     MaterialModules,
   ],
   providers: [
