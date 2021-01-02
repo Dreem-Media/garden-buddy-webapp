@@ -13,7 +13,7 @@ export class ErrorComponent implements OnInit {
     private route: ActivatedRoute
   ) { }
 
-  ngOnInit() {
+  ngOnInit(): void {
     const messageParam = 'message';
     this.message = this.route.snapshot.queryParams[messageParam];
   }

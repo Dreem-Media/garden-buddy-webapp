@@ -21,7 +21,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
     public userService: UserService
   ) {}
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.userSubscription = this.authenticationService.currentUser.subscribe(
       (userToken) => (this.currentUserToken = userToken)
     );
@@ -33,7 +33,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
     }
   }
 
-  logout() {
+  logout(): void {
     this.authenticationService.logout();
     this.router.navigate(['/login']);
   }

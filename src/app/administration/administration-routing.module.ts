@@ -16,7 +16,7 @@ const routes: Routes = [
   },
   {
     path: '',
-    redirectTo: '/administration/garden-objects',
+    redirectTo: '/administration/users',
     pathMatch: 'full'
   }
 ];
