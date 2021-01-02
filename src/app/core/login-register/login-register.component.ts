@@ -9,15 +9,14 @@ import { UserManagementControllerService } from 'src/app/api/services';
 enum LoginMode {
   Login,
   Register,
-  Forgot
+  Forgot,
 }
 
 @Component({
   selector: 'app-login-register',
-  templateUrl: './login-register.component.html'
+  templateUrl: './login-register.component.html',
 })
 export class LoginRegisterComponent implements OnInit {
-
   public formModel: any = {};
   public loginMode: any = LoginMode;
   public mode!: LoginMode;
@@ -29,7 +28,7 @@ export class LoginRegisterComponent implements OnInit {
     private router: Router,
     private authenticationService: AuthenticationService,
     private alerts: AlertsService,
-    private apiUserService: UserManagementControllerService, 
+    private apiUserService: UserManagementControllerService
   ) {
     if (this.authenticationService.currentUserValue) {
       this.router.navigate(['/']);
@@ -53,15 +52,19 @@ export class LoginRegisterComponent implements OnInit {
   }
 
   onLoginSubmit(): void {
-    this.authenticationService.login(this.formModel.email.toLowerCase(), this.formModel.password)
+    this.authenticationService
+      .login(this.formModel.email.toLowerCase(), this.formModel.password)
       .pipe(first())
       .subscribe(
         () => {
           this.router.navigate([this.returnUrl]);
         },
         (error: HttpErrorResponse) => {
-          this.alerts.sendMessage(error.message || error.error && error.error.message);
-        });
+          this.alerts.sendMessage(
+            error.message || (error.error && error.error.message)
+          );
+        }
+      );
   }
 
   onRegisterSubmit(): void {
@@ -70,7 +73,7 @@ export class LoginRegisterComponent implements OnInit {
     delete userToPost.acceptTerms;
     userToPost.email = userToPost.email.toLowerCase();
 
-    this.apiUserService.create(userToPost).subscribe(() => {
+    this.apiUserService.create({ body: userToPost }).subscribe(() => {
       this.alerts.sendMessage('Fantastic! Now lets login');
       this.changeMode(this.loginMode.Login);
     });
@@ -79,12 +82,14 @@ export class LoginRegisterComponent implements OnInit {
   onPasswordResetRequest(): void {
     const userPasswordResetRequest = this.formModel;
     userPasswordResetRequest.email = userPasswordResetRequest.email.toLowerCase();
-    userPasswordResetRequest.password = 'love-casper';
 
-    this.apiUserService.resetPasswordFinish(userPasswordResetRequest).subscribe(() => {
-      this.alerts.sendMessage('Fantastic! Now lets login');
-      this.changeMode(this.loginMode.Login);
-    });
+    this.apiUserService
+      .resetPasswordInit({ body: userPasswordResetRequest })
+      .subscribe(() => {
+        this.alerts.sendMessage(
+          'If this username exists, you will get an email'
+        );
+        // this.changeMode(this.loginMode.Login);
+      });
   }
-
 }

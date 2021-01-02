@@ -431,12 +431,12 @@ export class UserManagementControllerService extends BaseService {
    * This method doesn't expect any request body.
    */
   deleteById$Response(params: {
-    id: string;
+    userId: string;
   }): Observable<StrictHttpResponse<void>> {
 
     const rb = new RequestBuilder(this.rootUrl, UserManagementControllerService.UserManagementControllerDeleteByIdPath, 'delete');
     if (params) {
-      rb.path('id', params.id, {});
+      rb.path('userId', params.userId, {});
     }
 
     return this.http.request(rb.build({
@@ -457,7 +457,7 @@ export class UserManagementControllerService extends BaseService {
    * This method doesn't expect any request body.
    */
   deleteById(params: {
-    id: string;
+    userId: string;
   }): Observable<void> {
 
     return this.deleteById$Response(params).pipe(

@@ -11,14 +11,13 @@ import { AlertsService } from 'src/app/_services/alerts.service';
 import { LoadingService } from 'src/app/_services/loading.service';
 import { UserManagementControllerService } from 'src/app/api/services';
 import { User } from 'src/app/api/models/user';
-
+import { CoreHelpersService } from 'src/app/_services/core-helpers.service';
 
 @Component({
   selector: 'app-users',
-  templateUrl: './users.component.html'
+  templateUrl: './users.component.html',
 })
 export class UsersComponent implements OnInit {
-
   public displayedColumns: string[] = ['name', 'email', 'roles', 'edit'];
   public users = new MatTableDataSource<User[]>();
   public userCount: number = 0;
@@ -33,8 +32,9 @@ export class UsersComponent implements OnInit {
     public dialog: MatDialog,
     public router: Router,
     private alerts: AlertsService,
-    public loadingService: LoadingService
-  ) { }
+    public loadingService: LoadingService,
+    private coreHelpers: CoreHelpersService
+  ) {}
 
   ngOnInit() {
     this.users.paginator = this.paginator;
@@ -43,14 +43,22 @@ export class UsersComponent implements OnInit {
 
   getUsers(page?: number) {
     this.loadingService.loading = true;
-    this.apiUserService.count().subscribe((count: any) => {
-      this.userCount = count.count;
-      this.apiUserService.find().subscribe((data: User[]) => {
-        this.table.dataSource = data;
-        this.loadingService.loading = false;
-      });
-    },
-      () => this.loadingService.loading = false);
+    const params = this.coreHelpers.getCountParams(this.searchTerm, 'user');
+    this.apiUserService.count(params).subscribe(
+      (count: any) => {
+        this.userCount = count.count;
+        const params = this.coreHelpers.getSerachPaginationParams(
+          page,
+          this.searchTerm,
+          'user'
+        );
+        this.apiUserService.find(params).subscribe((data: User[]) => {
+          this.table.dataSource = data;
+          this.loadingService.loading = false;
+        });
+      },
+      () => (this.loadingService.loading = false)
+    );
   }
 
   updatePage($event: PageEvent) {
@@ -65,13 +73,13 @@ export class UsersComponent implements OnInit {
     const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
       data: {
         message: `Delete '${element.firstName}'`,
-        type: ConfirmType.delete
-      }
+        type: ConfirmType.delete,
+      },
     });
-    dialogRef.afterClosed().subscribe(result => {
+    dialogRef.afterClosed().subscribe((result) => {
       if (result) {
-        const id = element.id!;
-        this.apiUserService.deleteById({id}).subscribe(() => {
+        const userId = element.id!;
+        this.apiUserService.deleteById({ userId }).subscribe(() => {
           this.alerts.sendMessage('Deleted');
           this.updatePage({ pageIndex: 0, pageSize: 25, length: 0 });
         });
@@ -82,5 +90,4 @@ export class UsersComponent implements OnInit {
   searchForUser() {
     this.getUsers();
   }
-
 }

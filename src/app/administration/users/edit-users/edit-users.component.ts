@@ -43,15 +43,13 @@ export class EditUsersComponent implements OnInit {
         body: this.currentlyEditing,
       };
       this.apiUserService.set(params).subscribe(() => {
-        this.alerts.sendMessage('Deleted');
+        this.alerts.sendMessage('Saved');
       });
     } else {
-      // TODO: Change
-      (this.currentlyEditing as NewUser).password = '';
       this.apiUserService
         .create({ body: this.currentlyEditing as NewUser })
         .subscribe((data: User) => {
-          this.alerts.sendMessage('Deleted');
+          this.alerts.sendMessage('Created');
           this.currentlyEditing = data as NewUser;
         });
     }
