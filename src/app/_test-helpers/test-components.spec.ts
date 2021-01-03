@@ -3,16 +3,7 @@ import { GardenObject } from '../api/models';
 import { User } from '../api/models/user';
 
 export class UserServiceStub {
-  getUserCount() {
-    return of([]);
-  }
-  getAllUsers() {
-    return of([]);
-  }
-  getUserById() {
-    return of([]);
-  }
-  hasRole() {
+  hasRole(): boolean {
     return false;
   }
 }
@@ -20,7 +11,7 @@ export class UserServiceStub {
 export class MatDialogStub {}
 
 export class RouterStub {
-  navigate() {}
+  navigate(): void {}
 }
 
 export class AlertsServiceStub {}
@@ -39,35 +30,21 @@ export class AuthenticationServiceStub {
     this.isResetModeSubject = new BehaviorSubject<boolean>(false);
     this.isResetMode = this.isResetModeSubject.asObservable();
   }
-  public get currentUserValue(): User {
+  public get currentUserValue(): {} {
+    return { token: '' };
+  }
 }
 
 export class MyGardenServiceStub {
-  getUserGardenObjects() {
+  getUserGardenObjects(): Observable<[]> {
     return of([]);
   }
 }
 
-export class GardenObjectsServiceStub {
-  getGardenObjects() {
-    return of([]);
-  }
-  getGardenObjectsCount() {
-    return of(0);
-  }
-  getUserGardenObjects() {
-    return of([]);
-  }
-  getGardenObjectById() {
-    return of(new GardenObject());
-  }
-  getGardenObjectsByOwnedCount() {
-    return of([]);
-  }
-}
+export class GardenObjectsServiceStub {}
 
 export class SuggestionsServiceStub {
-  deleteSuggestionById() {
+  deleteSuggestionById(): Observable<[]> {
     return of();
   }
 }

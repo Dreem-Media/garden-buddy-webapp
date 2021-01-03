@@ -23,7 +23,7 @@ export class EditUsersComponent implements OnInit {
     private alerts: AlertsService
   ) {}
 
-  ngOnInit() {
+  ngOnInit(): void {
     const userId = this.route.snapshot.paramMap.get('user-id');
     if (userId) {
       if (userId === 'new') {

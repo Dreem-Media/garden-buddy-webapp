@@ -9,25 +9,25 @@ import { UserService } from './user.service';
 
 @Injectable({ providedIn: 'root' })
 export class AuthenticationService {
-  private currentUserSubject: BehaviorSubject<String>;
-  public currentUser: Observable<String>;
+  private currentUserSubject: BehaviorSubject<string>;
+  public currentUser: Observable<string>;
 
   constructor(
     private userService: UserService,
     private apiUserService: UserManagementControllerService
   ) {
     const sessionUser = localStorage.getItem('currentUserToken');
-    this.currentUserSubject = new BehaviorSubject<String>(
+    this.currentUserSubject = new BehaviorSubject<string>(
       sessionUser && JSON.parse(sessionUser)
     );
     this.currentUser = this.currentUserSubject.asObservable();
   }
 
-  public get currentUserValue(): String {
+  public get currentUserValue(): string {
     return this.currentUserSubject.value;
   }
 
-  login(email: string, password: string) {
+  login(email: string, password: string): Observable<void> {
     const params = {
       body: { email, password },
     };
@@ -35,7 +35,9 @@ export class AuthenticationService {
       map((token) => {
         // store user details and jwt token in local storage to keep user logged in between page refreshes
         sessionStorage.setItem('currentUserToken', JSON.stringify(token));
-        this.currentUserSubject.next(token.token!);
+        if (token.token) {
+          this.currentUserSubject.next(token.token);
+        }
         this.apiUserService.printCurrentUser().subscribe((data) => {
           this.userService.currentUser = data as User;
           return data;
@@ -44,7 +46,7 @@ export class AuthenticationService {
     );
   }
 
-  logout() {
+  logout(): void {
     // remove user from local storage to log user out
     localStorage.removeItem('currentUserToken');
     this.userService.removeUser();

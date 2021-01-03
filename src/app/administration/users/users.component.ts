@@ -20,7 +20,7 @@ import { CoreHelpersService } from 'src/app/_services/core-helpers.service';
 export class UsersComponent implements OnInit {
   public displayedColumns: string[] = ['name', 'email', 'roles', 'edit'];
   public users = new MatTableDataSource<User[]>();
-  public userCount: number = 0;
+  public userCount = 0;
 
   @ViewChild(MatPaginator, { static: true }) paginator!: MatPaginator;
   @ViewChild(MatTable, { static: true }) table!: MatTable<any>;
@@ -36,23 +36,23 @@ export class UsersComponent implements OnInit {
     private coreHelpers: CoreHelpersService
   ) {}
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.users.paginator = this.paginator;
     this.getUsers();
   }
 
-  getUsers(page?: number) {
+  getUsers(page?: number): void {
     this.loadingService.loading = true;
     const params = this.coreHelpers.getCountParams(this.searchTerm, 'user');
     this.apiUserService.count(params).subscribe(
       (count: any) => {
         this.userCount = count.count;
-        const params = this.coreHelpers.getSerachPaginationParams(
+        const sendParams = this.coreHelpers.getSerachPaginationParams(
           page,
           this.searchTerm,
           'user'
         );
-        this.apiUserService.find(params).subscribe((data: User[]) => {
+        this.apiUserService.find(sendParams).subscribe((data: User[]) => {
           this.table.dataSource = data;
           this.loadingService.loading = false;
         });
@@ -61,7 +61,7 @@ export class UsersComponent implements OnInit {
     );
   }
 
-  updatePage($event: PageEvent) {
+  updatePage($event: PageEvent): void {
     this.getUsers($event.pageIndex || 0);
   }
 
@@ -77,8 +77,8 @@ export class UsersComponent implements OnInit {
       },
     });
     dialogRef.afterClosed().subscribe((result) => {
-      if (result) {
-        const userId = element.id!;
+      if (result && element.id) {
+        const userId = element.id;
         this.apiUserService.deleteById({ userId }).subscribe(() => {
           this.alerts.sendMessage('Deleted');
           this.updatePage({ pageIndex: 0, pageSize: 25, length: 0 });
@@ -87,7 +87,7 @@ export class UsersComponent implements OnInit {
     });
   }
 
-  searchForUser() {
+  searchForUser(): void {
     this.getUsers();
   }
 }

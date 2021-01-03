@@ -1,4 +1,4 @@
-import { Injectable, OnDestroy } from "@angular/core";
+import { Injectable, OnDestroy } from '@angular/core';
 
 /**
  * Dont want to share in the global loading service?
@@ -12,7 +12,7 @@ import { Injectable, OnDestroy } from "@angular/core";
  */
 
 @Injectable({
-  providedIn: "root",
+  providedIn: 'root',
 })
 export class LoadingService implements OnDestroy {
   private localLoading!: boolean;

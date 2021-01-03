@@ -10,7 +10,7 @@ import { UserService } from 'src/app/_services/user.service';
   templateUrl: './header.component.html',
 })
 export class HeaderComponent implements OnInit, OnDestroy {
-  public currentUserToken!: String;
+  public currentUserToken!: string;
   public resetMode!: boolean;
 
   private userSubscription!: Subscription;

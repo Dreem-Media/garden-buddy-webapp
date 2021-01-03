@@ -9,7 +9,7 @@ export class CoreHelpersService {
   private itemsPerPage = 25;
 
   getCountParams(serachTerm?: string, searchType?: string): { where: {} } {
-    let params: { where: {} } = { where: {} };
+    const params: { where: {} } = { where: {} };
     let whereParam = {};
 
     if (searchType === 'user') {
@@ -37,7 +37,7 @@ export class CoreHelpersService {
     serachTerm?: string,
     searchType?: string
   ): { filter: {} } {
-    let params: { filter: {} } = { filter: {} };
+    const params: { filter: {} } = { filter: {} };
     let searchFilter = new SearchFilterParams();
     searchFilter = {
       order: 'ownedCount DESC',

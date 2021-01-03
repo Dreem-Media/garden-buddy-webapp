@@ -2,8 +2,7 @@ import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { LoginRegisterComponent } from './login-register.component';
 import { RouterTestingModule } from '@angular/router/testing';
-import { UserTasksServiceStub, AuthenticationServiceStub, AlertsServiceStub, UserServiceStub } from 'src/app/_test-helpers/test-components.spec';
-import { UserTasksService } from 'src/app/_services/user-tasks.service';
+import { AuthenticationServiceStub, AlertsServiceStub, UserServiceStub } from 'src/app/_test-helpers/test-components.spec';
 import { AuthenticationService } from 'src/app/_services/authentication.service';
 import { AlertsService } from 'src/app/_services/alerts.service';
 import { UserService } from 'src/app/_services/user.service';
@@ -20,7 +19,6 @@ describe('LoginRegisterComponent', () => {
       imports: [RouterTestingModule, FormsModule],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
       providers: [
-        { provide: UserTasksService, useClass: UserTasksServiceStub },
         { provide: AuthenticationService, useClass: AuthenticationServiceStub },
         { provide: AlertsService, useClass: AlertsServiceStub },
         { provide: UserService, useClass: UserServiceStub }

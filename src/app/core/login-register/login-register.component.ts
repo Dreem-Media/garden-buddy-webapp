@@ -35,7 +35,7 @@ export class LoginRegisterComponent implements OnInit {
     }
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.mode = LoginMode.Login;
     const paramRequest = 'returnUrl';
     this.returnUrl = this.route.snapshot.queryParams[paramRequest] || '/';
@@ -46,7 +46,7 @@ export class LoginRegisterComponent implements OnInit {
     }
   }
 
-  changeMode(mode: LoginMode) {
+  changeMode(mode: LoginMode): void {
     this.formModel = {};
     this.mode = mode;
   }
@@ -89,7 +89,7 @@ export class LoginRegisterComponent implements OnInit {
         this.alerts.sendMessage(
           'If this username exists, you will get an email'
         );
-        // this.changeMode(this.loginMode.Login);
+        this.changeMode(this.loginMode.Login);
       });
   }
 }

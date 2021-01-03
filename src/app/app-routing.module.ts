@@ -4,6 +4,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { ErrorComponent } from './core/error/error.component';
 import { LoginRegisterComponent } from './core/login-register/login-register.component';
 import { PasswordResetFormComponent } from './core/password-reset-form/password-reset-form.component';
+import { TermsComponent } from './core/terms/terms.component';
 import { WelcomeComponent } from './core/welcome/welcome.component';
 
 const routes: Routes = [
