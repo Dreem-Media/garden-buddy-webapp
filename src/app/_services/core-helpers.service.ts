@@ -23,7 +23,7 @@ export class CoreHelpersService {
     } else {
       whereParam = {
         or: [
-          { title: { like: serachTerm, options: 'i' } },
+          { name: { like: serachTerm, options: 'i' } },
           { description: { like: serachTerm, options: 'i' } },
         ],
       };
@@ -59,7 +59,7 @@ export class CoreHelpersService {
       } else {
         searchFilter.where = {
           or: [
-            { title: { like: serachTerm, options: 'i' } },
+            { name: { like: serachTerm, options: 'i' } },
             { description: { like: serachTerm, options: 'i' } },
           ],
         };
