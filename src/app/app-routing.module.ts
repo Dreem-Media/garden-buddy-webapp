@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { ErrorComponent } from './core/error/error.component';
 import { LoginRegisterComponent } from './core/login-register/login-register.component';
+import { PasswordResetFormComponent } from './core/password-reset-form/password-reset-form.component';
 import { WelcomeComponent } from './core/welcome/welcome.component';
 
 const routes: Routes = [
@@ -12,6 +13,8 @@ const routes: Routes = [
   },
 
   { path: 'login', component: LoginRegisterComponent },
+  { path: 'reset-password', component: PasswordResetFormComponent },
+  { path: 'terms', component: TermsComponent },
   { path: 'error', component: ErrorComponent },
 
   {

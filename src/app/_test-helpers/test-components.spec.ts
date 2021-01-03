@@ -40,9 +40,6 @@ export class AuthenticationServiceStub {
     this.isResetMode = this.isResetModeSubject.asObservable();
   }
   public get currentUserValue(): User {
-    return this.currentUserTokenSubject.value;
-  }
-  addTokenToUserFromReset(user: User) {}
 }
 
 export class MyGardenServiceStub {

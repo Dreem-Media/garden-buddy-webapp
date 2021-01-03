@@ -90,5 +90,5 @@ $theme-warn: mat-palette($mat-warn, main, lighter, darker);
 $gf-app-theme: mat-light-theme($theme-primary, $theme-accent, $theme-warn);
 @include angular-material-theme($gf-app-theme);
 
-// Green Fingers Style
+// Garden Buddy Style
 @import "styles/index";

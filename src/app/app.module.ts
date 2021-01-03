@@ -23,6 +23,8 @@ import { ConfirmationDialogComponent } from './core/confirmation-dialog/confirma
 import { ErrorComponent } from './core/error/error.component';
 import { LoginRegisterComponent } from './core/login-register/login-register.component';
 import { WelcomeComponent } from './core/welcome/welcome.component';
+import { PasswordResetFormComponent } from './core/password-reset-form/password-reset-form.component';
+import { TermsComponent } from './core/terms/terms.component';
 
 @NgModule({
   declarations: [
@@ -32,6 +34,8 @@ import { WelcomeComponent } from './core/welcome/welcome.component';
     ErrorComponent,
     ConfirmationDialogComponent,
     WelcomeComponent,
+    PasswordResetFormComponent,
+    TermsComponent,
     FooterComponent,
   ],
   imports: [
