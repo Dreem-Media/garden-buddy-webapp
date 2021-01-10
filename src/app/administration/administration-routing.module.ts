@@ -3,8 +3,18 @@ import { Routes, RouterModule } from '@angular/router';
 import { UsersComponent } from './users/users.component';
 import { EditUsersComponent } from './users/edit-users/edit-users.component';
 import { AuthGuard } from '../_helpers/auth.guard';
+import { GardenObjectsComponent } from './garden-objects/garden-objects.component';
+import { EditGardenObjectComponent } from './garden-objects/edit-garden-object/edit-garden-object.component';
 
 const routes: Routes = [
+  {
+    path: 'garden-objects',
+    canActivate: [AuthGuard],
+    children: [
+      { path: '', component: GardenObjectsComponent },
+      { path: ':garden-object-id', component: EditGardenObjectComponent }
+    ]
+  },
   {
     path: 'users',
     canActivate: [AuthGuard],
@@ -16,7 +26,7 @@ const routes: Routes = [
   },
   {
     path: '',
-    redirectTo: '/administration/users',
+    redirectTo: '/administration/garden-objects',
     pathMatch: 'full'
   }
 ];
