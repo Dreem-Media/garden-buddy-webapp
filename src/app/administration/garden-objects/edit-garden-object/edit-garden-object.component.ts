@@ -1,17 +1,20 @@
-import { Component, OnInit } from "@angular/core";
-import { ActivatedRoute } from "@angular/router";
-import { Location } from "@angular/common";
-import { AlertsService } from "src/app/_services/alerts.service";
-import { LoadingService } from "src/app/_services/loading.service";
-import { HttpErrorResponse } from "@angular/common/http";
-import { monthDefinitions } from "src/app/_models/_helpers/month-definitions.model";
-import { dayDefinitions } from "src/app/_models/_helpers/day-definitions.model";
-import { GardenObject } from "src/app/api/models";
-import { GardenObjectManagementControllerService, GardenObjectSuggestionsManagementControllerService } from "src/app/api/services";
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { Location } from '@angular/common';
+import { AlertsService } from 'src/app/_services/alerts.service';
+import { LoadingService } from 'src/app/_services/loading.service';
+import { HttpErrorResponse } from '@angular/common/http';
+import { monthDefinitions } from 'src/app/_models/_helpers/month-definitions.model';
+import { dayDefinitions } from 'src/app/_models/_helpers/day-definitions.model';
+import {
+  GardenObjectManagementControllerService,
+  GardenObjectSuggestionsManagementControllerService,
+} from 'src/app/api/services';
+import { GardenObject } from 'src/app/_models/_core/_garden/garden-object';
 
 @Component({
-  selector: "app-edit-garden-object",
-  templateUrl: "./edit-garden-object.component.html",
+  selector: 'app-edit-garden-object',
+  templateUrl: './edit-garden-object.component.html',
 })
 export class EditGardenObjectComponent implements OnInit {
   public currentlyEditingObject!: GardenObject;
@@ -26,21 +29,23 @@ export class EditGardenObjectComponent implements OnInit {
     private location: Location,
     private alerts: AlertsService,
     public loadingService: LoadingService
-  ) { }
+  ) {}
 
   ngOnInit() {
-    const id = this.route.snapshot.paramMap.get("garden-object-id");
+    const id = this.route.snapshot.paramMap.get('garden-object-id');
     if (id) {
-      if (id === "new") {
+      if (id === 'new') {
         this.currentlyEditingObject = new GardenObject();
-        let name = this.route.snapshot.queryParamMap.get("name");
+        let name = this.route.snapshot.queryParamMap.get('name');
         if (name) {
           this.currentlyEditingObject.name = name;
         }
       } else {
-        this.apiGardenObjectService.findById({ id }).subscribe((data: GardenObject) => {
-          this.currentlyEditingObject = data;
-        });
+        this.apiGardenObjectService
+          .findById({ id })
+          .subscribe((data: GardenObject) => {
+            this.currentlyEditingObject = data;
+          });
       }
     }
   }
@@ -56,38 +61,11 @@ export class EditGardenObjectComponent implements OnInit {
         body: this.currentlyEditingObject,
       };
 
-      this.apiGardenObjectService
-        .updateById(params)
-        .subscribe(
-          () => {
-            this.alerts.sendMessage(
-              `Updated ${this.currentlyEditingObject.name}`
-            );
-            this.loadingService.loading = false;
-          },
-          (err: HttpErrorResponse) => {
-            this.loadingService.loading = false;
-            this.alerts.sendMessage(err.error.message);
-          }
-        );
-    } else {
-      // Create new
-      this.apiGardenObjectService.create({ body: this.currentlyEditingObject }).subscribe(
-        (data: any) => {
+      this.apiGardenObjectService.updateById(params).subscribe(
+        () => {
           this.alerts.sendMessage(
-            `Created ${this.currentlyEditingObject.name}`
+            `Updated ${this.currentlyEditingObject.name}`
           );
-          this.currentlyEditingObject = data;
-
-          // Delete related Suggestion
-          const suggestionId = this.route.snapshot.queryParamMap.get(
-            "suggestionId"
-          );
-          if (suggestionId) {
-            this.apiGardenSuggestionService
-              .deleteById({ id: suggestionId })
-              .subscribe();
-          }
           this.loadingService.loading = false;
         },
         (err: HttpErrorResponse) => {
@@ -95,6 +73,33 @@ export class EditGardenObjectComponent implements OnInit {
           this.alerts.sendMessage(err.error.message);
         }
       );
+    } else {
+      // Create new
+      this.apiGardenObjectService
+        .create({ body: this.currentlyEditingObject })
+        .subscribe(
+          (data: any) => {
+            this.alerts.sendMessage(
+              `Created ${this.currentlyEditingObject.name}`
+            );
+            this.currentlyEditingObject = data;
+
+            // Delete related Suggestion
+            const suggestionId = this.route.snapshot.queryParamMap.get(
+              'suggestionId'
+            );
+            if (suggestionId) {
+              this.apiGardenSuggestionService
+                .deleteById({ id: suggestionId })
+                .subscribe();
+            }
+            this.loadingService.loading = false;
+          },
+          (err: HttpErrorResponse) => {
+            this.loadingService.loading = false;
+            this.alerts.sendMessage(err.error.message);
+          }
+        );
     }
   }
 

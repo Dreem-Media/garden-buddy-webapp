@@ -4,9 +4,9 @@ import { Location } from '@angular/common';
 
 import { AlertsService } from 'src/app/_services/alerts.service';
 import { typesOfRoles } from 'src/app/types-of-roles';
-import { User } from 'src/app/api/models/user';
 import { UserManagementControllerService } from 'src/app/api/services';
-import { NewUser } from 'src/app/api/models/new-user';
+import { NewUser } from 'src/app/_models/_core/_users/newuser.model';
+import { API_User } from 'src/app/api/models';
 
 @Component({
   selector: 'app-edit-users',
@@ -31,7 +31,7 @@ export class EditUsersComponent implements OnInit {
       } else {
         this.apiUserService
           .findById({ userId })
-          .subscribe((data: User) => (this.currentlyEditing = data as NewUser));
+          .subscribe((data: API_User) => (this.currentlyEditing = data as NewUser));
       }
     }
   }
@@ -48,7 +48,7 @@ export class EditUsersComponent implements OnInit {
     } else {
       this.apiUserService
         .create({ body: this.currentlyEditing as NewUser })
-        .subscribe((data: User) => {
+        .subscribe((data: API_User) => {
           this.alerts.sendMessage('Created');
           this.currentlyEditing = data as NewUser;
         });

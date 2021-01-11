@@ -6,12 +6,12 @@ import { Router } from '@angular/router';
 
 import { ConfirmationDialogComponent } from 'src/app/core/confirmation-dialog/confirmation-dialog.component';
 import { ConfirmType } from 'src/app/core/confirmation-dialog/confirmation-type.model';
-import { UserService } from 'src/app/_services/user.service';
 import { AlertsService } from 'src/app/_services/alerts.service';
 import { LoadingService } from 'src/app/_services/loading.service';
 import { UserManagementControllerService } from 'src/app/api/services';
-import { User } from 'src/app/api/models/user';
 import { CoreHelpersService } from 'src/app/_services/core-helpers.service';
+import { User } from 'src/app/_models/_core/_users/user.model';
+import { API_User } from 'src/app/api/models';
 
 @Component({
   selector: 'app-users',
@@ -52,7 +52,7 @@ export class UsersComponent implements OnInit {
           this.searchTerm,
           'user'
         );
-        this.apiUserService.find(sendParams).subscribe((data: User[]) => {
+        this.apiUserService.find(sendParams).subscribe((data: API_User[]) => {
           this.table.dataSource = data;
           this.loadingService.loading = false;
         });
