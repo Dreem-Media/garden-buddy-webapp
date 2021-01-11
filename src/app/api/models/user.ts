@@ -12,7 +12,3 @@ export interface User {
   resetTimestamp?: string;
   roles?: Array<string>;
 }
-
-export class User implements User {
-  constructor() {}
-}

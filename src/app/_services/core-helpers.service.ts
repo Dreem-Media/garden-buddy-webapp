@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpParams } from '@angular/common/http';
-import { SearchFilterParams } from '../_models/search-filter-params';
+import { SearchFilterParams } from '../_models/_helpers/search-filter-params';
 
 @Injectable({
   providedIn: 'root',

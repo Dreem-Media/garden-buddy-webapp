@@ -4,8 +4,8 @@ import { Location } from "@angular/common";
 import { AlertsService } from "src/app/_services/alerts.service";
 import { LoadingService } from "src/app/_services/loading.service";
 import { HttpErrorResponse } from "@angular/common/http";
-import { monthDefinitions } from "src/app/_models/month-definitions.model";
-import { dayDefinitions } from "src/app/_models/day-definitions.model";
+import { monthDefinitions } from "src/app/_models/_helpers/month-definitions.model";
+import { dayDefinitions } from "src/app/_models/_helpers/day-definitions.model";
 import { GardenObject } from "src/app/api/models";
 import { GardenObjectManagementControllerService, GardenObjectSuggestionsManagementControllerService } from "src/app/api/services";
 

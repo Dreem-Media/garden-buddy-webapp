@@ -17,5 +17,3 @@ export interface NewUser {
   resetTimestamp?: string;
   roles?: Array<string>;
 }
-
-export class NewUser implements NewUser {}
