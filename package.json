@@ -7,7 +7,9 @@
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "ng-openapi-gen": "ng-openapi-gen",
+    "update-models": "ng-openapi-gen --input ../openapi.json --output src/app/api --modelPrefix API_"
   },
   "private": true,
   "dependencies": {

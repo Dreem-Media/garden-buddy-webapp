@@ -1,5 +1,5 @@
 /* tslint:disable */
 /* eslint-disable */
-export interface ResetPasswordInit {
+export interface API_ResetPasswordInit {
   email: string;
 }

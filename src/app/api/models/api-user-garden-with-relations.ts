@@ -1,17 +1,16 @@
 /* tslint:disable */
 /* eslint-disable */
-import { UserWithRelations } from './user-with-relations';
+import { API_UserWithRelations } from './api-user-with-relations';
 
 /**
  * (tsType: UserGardenWithRelations, schemaOptions: { includeRelations: true })
  */
-export interface UserGardenWithRelations {
-  defaultGarden?: boolean;
+export interface API_UserGardenWithRelations {
   description?: string;
   id?: string;
   image?: string;
   name: string;
   owned_garden_objects?: Array<string>;
-  user?: UserWithRelations;
+  user?: API_UserWithRelations;
   userId?: string;
 }

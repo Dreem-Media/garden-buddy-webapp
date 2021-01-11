@@ -4,7 +4,7 @@
 /**
  * (tsType: Omit<GardenObjectSuggestion, 'id'>, schemaOptions: { title: 'NewGardenObjectSuggestion', exclude: [ 'id' ] })
  */
-export interface NewGardenObjectSuggestion {
+export interface API_NewGardenObjectSuggestion {
   description?: string;
   garden_category_ids?: Array<string>;
   name: string;

@@ -9,11 +9,11 @@ import { RequestBuilder } from '../request-builder';
 import { Observable } from 'rxjs';
 import { map, filter } from 'rxjs/operators';
 
-import { GardenObject } from '../models/garden-object';
-import { GardenObjectPartial } from '../models/garden-object-partial';
-import { GardenObjectWithRelations } from '../models/garden-object-with-relations';
-import { NewGardenObject } from '../models/new-garden-object';
-import { Count as LoopbackCount } from '../models/loopback/count';
+import { API_GardenObject } from '../models/api-garden-object';
+import { API_GardenObjectPartial } from '../models/api-garden-object-partial';
+import { API_GardenObjectWithRelations } from '../models/api-garden-object-with-relations';
+import { API_NewGardenObject } from '../models/api-new-garden-object';
+import { API_Count as LoopbackAPI_Count } from '../models/loopback/api-count';
 
 @Injectable({
   providedIn: 'root',
@@ -39,7 +39,7 @@ export class GardenObjectManagementControllerService extends BaseService {
    */
   count$Response(params?: {
     where?: any;
-  }): Observable<StrictHttpResponse<LoopbackCount>> {
+  }): Observable<StrictHttpResponse<LoopbackAPI_Count>> {
 
     const rb = new RequestBuilder(this.rootUrl, GardenObjectManagementControllerService.GardenObjectManagementControllerCountPath, 'get');
     if (params) {
@@ -52,7 +52,7 @@ export class GardenObjectManagementControllerService extends BaseService {
     })).pipe(
       filter((r: any) => r instanceof HttpResponse),
       map((r: HttpResponse<any>) => {
-        return r as StrictHttpResponse<LoopbackCount>;
+        return r as StrictHttpResponse<LoopbackAPI_Count>;
       })
     );
   }
@@ -65,10 +65,10 @@ export class GardenObjectManagementControllerService extends BaseService {
    */
   count(params?: {
     where?: any;
-  }): Observable<LoopbackCount> {
+  }): Observable<LoopbackAPI_Count> {
 
     return this.count$Response(params).pipe(
-      map((r: StrictHttpResponse<LoopbackCount>) => r.body as LoopbackCount)
+      map((r: StrictHttpResponse<LoopbackAPI_Count>) => r.body as LoopbackAPI_Count)
     );
   }
 
@@ -86,7 +86,7 @@ export class GardenObjectManagementControllerService extends BaseService {
   findById$Response(params: {
     id: string;
     filter?: any;
-  }): Observable<StrictHttpResponse<GardenObjectWithRelations>> {
+  }): Observable<StrictHttpResponse<API_GardenObjectWithRelations>> {
 
     const rb = new RequestBuilder(this.rootUrl, GardenObjectManagementControllerService.GardenObjectManagementControllerFindByIdPath, 'get');
     if (params) {
@@ -100,7 +100,7 @@ export class GardenObjectManagementControllerService extends BaseService {
     })).pipe(
       filter((r: any) => r instanceof HttpResponse),
       map((r: HttpResponse<any>) => {
-        return r as StrictHttpResponse<GardenObjectWithRelations>;
+        return r as StrictHttpResponse<API_GardenObjectWithRelations>;
       })
     );
   }
@@ -114,10 +114,10 @@ export class GardenObjectManagementControllerService extends BaseService {
   findById(params: {
     id: string;
     filter?: any;
-  }): Observable<GardenObjectWithRelations> {
+  }): Observable<API_GardenObjectWithRelations> {
 
     return this.findById$Response(params).pipe(
-      map((r: StrictHttpResponse<GardenObjectWithRelations>) => r.body as GardenObjectWithRelations)
+      map((r: StrictHttpResponse<API_GardenObjectWithRelations>) => r.body as API_GardenObjectWithRelations)
     );
   }
 
@@ -134,7 +134,7 @@ export class GardenObjectManagementControllerService extends BaseService {
    */
   replaceById$Response(params: {
     id: string;
-    body?: GardenObject
+    body?: API_GardenObject
   }): Observable<StrictHttpResponse<void>> {
 
     const rb = new RequestBuilder(this.rootUrl, GardenObjectManagementControllerService.GardenObjectManagementControllerReplaceByIdPath, 'put');
@@ -162,7 +162,7 @@ export class GardenObjectManagementControllerService extends BaseService {
    */
   replaceById(params: {
     id: string;
-    body?: GardenObject
+    body?: API_GardenObject
   }): Observable<void> {
 
     return this.replaceById$Response(params).pipe(
@@ -229,7 +229,7 @@ export class GardenObjectManagementControllerService extends BaseService {
    */
   updateById$Response(params: {
     id: string;
-    body?: GardenObjectPartial
+    body?: API_GardenObjectPartial
   }): Observable<StrictHttpResponse<void>> {
 
     const rb = new RequestBuilder(this.rootUrl, GardenObjectManagementControllerService.GardenObjectManagementControllerUpdateByIdPath, 'patch');
@@ -257,7 +257,7 @@ export class GardenObjectManagementControllerService extends BaseService {
    */
   updateById(params: {
     id: string;
-    body?: GardenObjectPartial
+    body?: API_GardenObjectPartial
   }): Observable<void> {
 
     return this.updateById$Response(params).pipe(
@@ -278,7 +278,7 @@ export class GardenObjectManagementControllerService extends BaseService {
    */
   find$Response(params?: {
     filter?: any;
-  }): Observable<StrictHttpResponse<Array<GardenObjectWithRelations>>> {
+  }): Observable<StrictHttpResponse<Array<API_GardenObjectWithRelations>>> {
 
     const rb = new RequestBuilder(this.rootUrl, GardenObjectManagementControllerService.GardenObjectManagementControllerFindPath, 'get');
     if (params) {
@@ -291,7 +291,7 @@ export class GardenObjectManagementControllerService extends BaseService {
     })).pipe(
       filter((r: any) => r instanceof HttpResponse),
       map((r: HttpResponse<any>) => {
-        return r as StrictHttpResponse<Array<GardenObjectWithRelations>>;
+        return r as StrictHttpResponse<Array<API_GardenObjectWithRelations>>;
       })
     );
   }
@@ -304,10 +304,10 @@ export class GardenObjectManagementControllerService extends BaseService {
    */
   find(params?: {
     filter?: any;
-  }): Observable<Array<GardenObjectWithRelations>> {
+  }): Observable<Array<API_GardenObjectWithRelations>> {
 
     return this.find$Response(params).pipe(
-      map((r: StrictHttpResponse<Array<GardenObjectWithRelations>>) => r.body as Array<GardenObjectWithRelations>)
+      map((r: StrictHttpResponse<Array<API_GardenObjectWithRelations>>) => r.body as Array<API_GardenObjectWithRelations>)
     );
   }
 
@@ -323,8 +323,8 @@ export class GardenObjectManagementControllerService extends BaseService {
    * This method sends `application/json` and handles request body of type `application/json`.
    */
   create$Response(params?: {
-    body?: NewGardenObject
-  }): Observable<StrictHttpResponse<GardenObject>> {
+    body?: API_NewGardenObject
+  }): Observable<StrictHttpResponse<API_GardenObject>> {
 
     const rb = new RequestBuilder(this.rootUrl, GardenObjectManagementControllerService.GardenObjectManagementControllerCreatePath, 'post');
     if (params) {
@@ -337,7 +337,7 @@ export class GardenObjectManagementControllerService extends BaseService {
     })).pipe(
       filter((r: any) => r instanceof HttpResponse),
       map((r: HttpResponse<any>) => {
-        return r as StrictHttpResponse<GardenObject>;
+        return r as StrictHttpResponse<API_GardenObject>;
       })
     );
   }
@@ -349,11 +349,11 @@ export class GardenObjectManagementControllerService extends BaseService {
    * This method sends `application/json` and handles request body of type `application/json`.
    */
   create(params?: {
-    body?: NewGardenObject
-  }): Observable<GardenObject> {
+    body?: API_NewGardenObject
+  }): Observable<API_GardenObject> {
 
     return this.create$Response(params).pipe(
-      map((r: StrictHttpResponse<GardenObject>) => r.body as GardenObject)
+      map((r: StrictHttpResponse<API_GardenObject>) => r.body as API_GardenObject)
     );
   }
 

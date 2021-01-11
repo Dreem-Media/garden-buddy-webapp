@@ -9,12 +9,12 @@ import { RequestBuilder } from '../request-builder';
 import { Observable } from 'rxjs';
 import { map, filter } from 'rxjs/operators';
 
-import { KeyAndPassword } from '../models/key-and-password';
-import { NewUser } from '../models/new-user';
-import { ResetPasswordInit } from '../models/reset-password-init';
-import { User } from '../models/user';
-import { UserWithRelations } from '../models/user-with-relations';
-import { Count as LoopbackCount } from '../models/loopback/count';
+import { API_KeyAndPassword } from '../models/api-key-and-password';
+import { API_NewUser } from '../models/api-new-user';
+import { API_ResetPasswordInit } from '../models/api-reset-password-init';
+import { API_User } from '../models/api-user';
+import { API_UserWithRelations } from '../models/api-user-with-relations';
+import { API_Count as LoopbackAPI_Count } from '../models/loopback/api-count';
 
 @Injectable({
   providedIn: 'root',
@@ -94,7 +94,7 @@ export class UserManagementControllerService extends BaseService {
    */
   count$Response(params?: {
     where?: any;
-  }): Observable<StrictHttpResponse<LoopbackCount>> {
+  }): Observable<StrictHttpResponse<LoopbackAPI_Count>> {
 
     const rb = new RequestBuilder(this.rootUrl, UserManagementControllerService.UserManagementControllerCountPath, 'get');
     if (params) {
@@ -107,7 +107,7 @@ export class UserManagementControllerService extends BaseService {
     })).pipe(
       filter((r: any) => r instanceof HttpResponse),
       map((r: HttpResponse<any>) => {
-        return r as StrictHttpResponse<LoopbackCount>;
+        return r as StrictHttpResponse<LoopbackAPI_Count>;
       })
     );
   }
@@ -120,10 +120,10 @@ export class UserManagementControllerService extends BaseService {
    */
   count(params?: {
     where?: any;
-  }): Observable<LoopbackCount> {
+  }): Observable<LoopbackAPI_Count> {
 
     return this.count$Response(params).pipe(
-      map((r: StrictHttpResponse<LoopbackCount>) => r.body as LoopbackCount)
+      map((r: StrictHttpResponse<LoopbackAPI_Count>) => r.body as LoopbackAPI_Count)
     );
   }
 
@@ -236,7 +236,7 @@ export class UserManagementControllerService extends BaseService {
    * This method sends `application/json` and handles request body of type `application/json`.
    */
   resetPasswordFinish$Response(params?: {
-    body?: KeyAndPassword
+    body?: API_KeyAndPassword
   }): Observable<StrictHttpResponse<void>> {
 
     const rb = new RequestBuilder(this.rootUrl, UserManagementControllerService.UserManagementControllerResetPasswordFinishPath, 'put');
@@ -262,7 +262,7 @@ export class UserManagementControllerService extends BaseService {
    * This method sends `application/json` and handles request body of type `application/json`.
    */
   resetPasswordFinish(params?: {
-    body?: KeyAndPassword
+    body?: API_KeyAndPassword
   }): Observable<void> {
 
     return this.resetPasswordFinish$Response(params).pipe(
@@ -282,7 +282,7 @@ export class UserManagementControllerService extends BaseService {
    * This method sends `application/json` and handles request body of type `application/json`.
    */
   resetPasswordInit$Response(params?: {
-    body?: ResetPasswordInit
+    body?: API_ResetPasswordInit
   }): Observable<StrictHttpResponse<void>> {
 
     const rb = new RequestBuilder(this.rootUrl, UserManagementControllerService.UserManagementControllerResetPasswordInitPath, 'post');
@@ -308,7 +308,7 @@ export class UserManagementControllerService extends BaseService {
    * This method sends `application/json` and handles request body of type `application/json`.
    */
   resetPasswordInit(params?: {
-    body?: ResetPasswordInit
+    body?: API_ResetPasswordInit
   }): Observable<void> {
 
     return this.resetPasswordInit$Response(params).pipe(
@@ -329,7 +329,7 @@ export class UserManagementControllerService extends BaseService {
    */
   findById$Response(params: {
     userId: string;
-  }): Observable<StrictHttpResponse<User>> {
+  }): Observable<StrictHttpResponse<API_User>> {
 
     const rb = new RequestBuilder(this.rootUrl, UserManagementControllerService.UserManagementControllerFindByIdPath, 'get');
     if (params) {
@@ -342,7 +342,7 @@ export class UserManagementControllerService extends BaseService {
     })).pipe(
       filter((r: any) => r instanceof HttpResponse),
       map((r: HttpResponse<any>) => {
-        return r as StrictHttpResponse<User>;
+        return r as StrictHttpResponse<API_User>;
       })
     );
   }
@@ -355,10 +355,10 @@ export class UserManagementControllerService extends BaseService {
    */
   findById(params: {
     userId: string;
-  }): Observable<User> {
+  }): Observable<API_User> {
 
     return this.findById$Response(params).pipe(
-      map((r: StrictHttpResponse<User>) => r.body as User)
+      map((r: StrictHttpResponse<API_User>) => r.body as API_User)
     );
   }
 
@@ -379,8 +379,8 @@ export class UserManagementControllerService extends BaseService {
     /**
      * update user
      */
-    body?: User
-  }): Observable<StrictHttpResponse<User>> {
+    body?: API_User
+  }): Observable<StrictHttpResponse<API_User>> {
 
     const rb = new RequestBuilder(this.rootUrl, UserManagementControllerService.UserManagementControllerSetPath, 'put');
     if (params) {
@@ -394,7 +394,7 @@ export class UserManagementControllerService extends BaseService {
     })).pipe(
       filter((r: any) => r instanceof HttpResponse),
       map((r: HttpResponse<any>) => {
-        return r as StrictHttpResponse<User>;
+        return r as StrictHttpResponse<API_User>;
       })
     );
   }
@@ -411,11 +411,11 @@ export class UserManagementControllerService extends BaseService {
     /**
      * update user
      */
-    body?: User
-  }): Observable<User> {
+    body?: API_User
+  }): Observable<API_User> {
 
     return this.set$Response(params).pipe(
-      map((r: StrictHttpResponse<User>) => r.body as User)
+      map((r: StrictHttpResponse<API_User>) => r.body as API_User)
     );
   }
 
@@ -478,7 +478,7 @@ export class UserManagementControllerService extends BaseService {
    */
   find$Response(params?: {
     filter?: any;
-  }): Observable<StrictHttpResponse<Array<UserWithRelations>>> {
+  }): Observable<StrictHttpResponse<Array<API_UserWithRelations>>> {
 
     const rb = new RequestBuilder(this.rootUrl, UserManagementControllerService.UserManagementControllerFindPath, 'get');
     if (params) {
@@ -491,7 +491,7 @@ export class UserManagementControllerService extends BaseService {
     })).pipe(
       filter((r: any) => r instanceof HttpResponse),
       map((r: HttpResponse<any>) => {
-        return r as StrictHttpResponse<Array<UserWithRelations>>;
+        return r as StrictHttpResponse<Array<API_UserWithRelations>>;
       })
     );
   }
@@ -504,10 +504,10 @@ export class UserManagementControllerService extends BaseService {
    */
   find(params?: {
     filter?: any;
-  }): Observable<Array<UserWithRelations>> {
+  }): Observable<Array<API_UserWithRelations>> {
 
     return this.find$Response(params).pipe(
-      map((r: StrictHttpResponse<Array<UserWithRelations>>) => r.body as Array<UserWithRelations>)
+      map((r: StrictHttpResponse<Array<API_UserWithRelations>>) => r.body as Array<API_UserWithRelations>)
     );
   }
 
@@ -523,8 +523,8 @@ export class UserManagementControllerService extends BaseService {
    * This method sends `application/json` and handles request body of type `application/json`.
    */
   create$Response(params?: {
-    body?: NewUser
-  }): Observable<StrictHttpResponse<User>> {
+    body?: API_NewUser
+  }): Observable<StrictHttpResponse<API_User>> {
 
     const rb = new RequestBuilder(this.rootUrl, UserManagementControllerService.UserManagementControllerCreatePath, 'post');
     if (params) {
@@ -537,7 +537,7 @@ export class UserManagementControllerService extends BaseService {
     })).pipe(
       filter((r: any) => r instanceof HttpResponse),
       map((r: HttpResponse<any>) => {
-        return r as StrictHttpResponse<User>;
+        return r as StrictHttpResponse<API_User>;
       })
     );
   }
@@ -549,11 +549,11 @@ export class UserManagementControllerService extends BaseService {
    * This method sends `application/json` and handles request body of type `application/json`.
    */
   create(params?: {
-    body?: NewUser
-  }): Observable<User> {
+    body?: API_NewUser
+  }): Observable<API_User> {
 
     return this.create$Response(params).pipe(
-      map((r: StrictHttpResponse<User>) => r.body as User)
+      map((r: StrictHttpResponse<API_User>) => r.body as API_User)
     );
   }
 

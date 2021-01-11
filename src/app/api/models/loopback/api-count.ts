@@ -1,5 +1,5 @@
 /* tslint:disable */
 /* eslint-disable */
-export interface Count {
+export interface API_Count {
   count?: number;
 }

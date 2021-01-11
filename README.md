@@ -19,4 +19,4 @@ Save openapi.json file in directory above this
 
 Run this command
 
-`ng-openapi-gen --input ../openapi.json --output src/app/api`
+`ng-openapi-gen --input ../openapi.json --output src/app/api --modelPrefix API_`

@@ -9,11 +9,11 @@ import { RequestBuilder } from '../request-builder';
 import { Observable } from 'rxjs';
 import { map, filter } from 'rxjs/operators';
 
-import { GardenObjectSuggestion } from '../models/garden-object-suggestion';
-import { GardenObjectSuggestionPartial } from '../models/garden-object-suggestion-partial';
-import { GardenObjectSuggestionWithRelations } from '../models/garden-object-suggestion-with-relations';
-import { NewGardenObjectSuggestion } from '../models/new-garden-object-suggestion';
-import { Count as LoopbackCount } from '../models/loopback/count';
+import { API_GardenObjectSuggestion } from '../models/api-garden-object-suggestion';
+import { API_GardenObjectSuggestionPartial } from '../models/api-garden-object-suggestion-partial';
+import { API_GardenObjectSuggestionWithRelations } from '../models/api-garden-object-suggestion-with-relations';
+import { API_NewGardenObjectSuggestion } from '../models/api-new-garden-object-suggestion';
+import { API_Count as LoopbackAPI_Count } from '../models/loopback/api-count';
 
 @Injectable({
   providedIn: 'root',
@@ -39,7 +39,7 @@ export class GardenObjectSuggestionsManagementControllerService extends BaseServ
    */
   count$Response(params?: {
     where?: any;
-  }): Observable<StrictHttpResponse<LoopbackCount>> {
+  }): Observable<StrictHttpResponse<LoopbackAPI_Count>> {
 
     const rb = new RequestBuilder(this.rootUrl, GardenObjectSuggestionsManagementControllerService.GardenObjectSuggestionsManagementControllerCountPath, 'get');
     if (params) {
@@ -52,7 +52,7 @@ export class GardenObjectSuggestionsManagementControllerService extends BaseServ
     })).pipe(
       filter((r: any) => r instanceof HttpResponse),
       map((r: HttpResponse<any>) => {
-        return r as StrictHttpResponse<LoopbackCount>;
+        return r as StrictHttpResponse<LoopbackAPI_Count>;
       })
     );
   }
@@ -65,10 +65,10 @@ export class GardenObjectSuggestionsManagementControllerService extends BaseServ
    */
   count(params?: {
     where?: any;
-  }): Observable<LoopbackCount> {
+  }): Observable<LoopbackAPI_Count> {
 
     return this.count$Response(params).pipe(
-      map((r: StrictHttpResponse<LoopbackCount>) => r.body as LoopbackCount)
+      map((r: StrictHttpResponse<LoopbackAPI_Count>) => r.body as LoopbackAPI_Count)
     );
   }
 
@@ -86,7 +86,7 @@ export class GardenObjectSuggestionsManagementControllerService extends BaseServ
   findById$Response(params: {
     id: string;
     filter?: any;
-  }): Observable<StrictHttpResponse<GardenObjectSuggestionWithRelations>> {
+  }): Observable<StrictHttpResponse<API_GardenObjectSuggestionWithRelations>> {
 
     const rb = new RequestBuilder(this.rootUrl, GardenObjectSuggestionsManagementControllerService.GardenObjectSuggestionsManagementControllerFindByIdPath, 'get');
     if (params) {
@@ -100,7 +100,7 @@ export class GardenObjectSuggestionsManagementControllerService extends BaseServ
     })).pipe(
       filter((r: any) => r instanceof HttpResponse),
       map((r: HttpResponse<any>) => {
-        return r as StrictHttpResponse<GardenObjectSuggestionWithRelations>;
+        return r as StrictHttpResponse<API_GardenObjectSuggestionWithRelations>;
       })
     );
   }
@@ -114,10 +114,10 @@ export class GardenObjectSuggestionsManagementControllerService extends BaseServ
   findById(params: {
     id: string;
     filter?: any;
-  }): Observable<GardenObjectSuggestionWithRelations> {
+  }): Observable<API_GardenObjectSuggestionWithRelations> {
 
     return this.findById$Response(params).pipe(
-      map((r: StrictHttpResponse<GardenObjectSuggestionWithRelations>) => r.body as GardenObjectSuggestionWithRelations)
+      map((r: StrictHttpResponse<API_GardenObjectSuggestionWithRelations>) => r.body as API_GardenObjectSuggestionWithRelations)
     );
   }
 
@@ -134,7 +134,7 @@ export class GardenObjectSuggestionsManagementControllerService extends BaseServ
    */
   replaceById$Response(params: {
     id: string;
-    body?: GardenObjectSuggestion
+    body?: API_GardenObjectSuggestion
   }): Observable<StrictHttpResponse<void>> {
 
     const rb = new RequestBuilder(this.rootUrl, GardenObjectSuggestionsManagementControllerService.GardenObjectSuggestionsManagementControllerReplaceByIdPath, 'put');
@@ -162,7 +162,7 @@ export class GardenObjectSuggestionsManagementControllerService extends BaseServ
    */
   replaceById(params: {
     id: string;
-    body?: GardenObjectSuggestion
+    body?: API_GardenObjectSuggestion
   }): Observable<void> {
 
     return this.replaceById$Response(params).pipe(
@@ -229,7 +229,7 @@ export class GardenObjectSuggestionsManagementControllerService extends BaseServ
    */
   updateById$Response(params: {
     id: string;
-    body?: GardenObjectSuggestionPartial
+    body?: API_GardenObjectSuggestionPartial
   }): Observable<StrictHttpResponse<void>> {
 
     const rb = new RequestBuilder(this.rootUrl, GardenObjectSuggestionsManagementControllerService.GardenObjectSuggestionsManagementControllerUpdateByIdPath, 'patch');
@@ -257,7 +257,7 @@ export class GardenObjectSuggestionsManagementControllerService extends BaseServ
    */
   updateById(params: {
     id: string;
-    body?: GardenObjectSuggestionPartial
+    body?: API_GardenObjectSuggestionPartial
   }): Observable<void> {
 
     return this.updateById$Response(params).pipe(
@@ -278,7 +278,7 @@ export class GardenObjectSuggestionsManagementControllerService extends BaseServ
    */
   find$Response(params?: {
     filter?: any;
-  }): Observable<StrictHttpResponse<Array<GardenObjectSuggestionWithRelations>>> {
+  }): Observable<StrictHttpResponse<Array<API_GardenObjectSuggestionWithRelations>>> {
 
     const rb = new RequestBuilder(this.rootUrl, GardenObjectSuggestionsManagementControllerService.GardenObjectSuggestionsManagementControllerFindPath, 'get');
     if (params) {
@@ -291,7 +291,7 @@ export class GardenObjectSuggestionsManagementControllerService extends BaseServ
     })).pipe(
       filter((r: any) => r instanceof HttpResponse),
       map((r: HttpResponse<any>) => {
-        return r as StrictHttpResponse<Array<GardenObjectSuggestionWithRelations>>;
+        return r as StrictHttpResponse<Array<API_GardenObjectSuggestionWithRelations>>;
       })
     );
   }
@@ -304,10 +304,10 @@ export class GardenObjectSuggestionsManagementControllerService extends BaseServ
    */
   find(params?: {
     filter?: any;
-  }): Observable<Array<GardenObjectSuggestionWithRelations>> {
+  }): Observable<Array<API_GardenObjectSuggestionWithRelations>> {
 
     return this.find$Response(params).pipe(
-      map((r: StrictHttpResponse<Array<GardenObjectSuggestionWithRelations>>) => r.body as Array<GardenObjectSuggestionWithRelations>)
+      map((r: StrictHttpResponse<Array<API_GardenObjectSuggestionWithRelations>>) => r.body as Array<API_GardenObjectSuggestionWithRelations>)
     );
   }
 
@@ -323,8 +323,8 @@ export class GardenObjectSuggestionsManagementControllerService extends BaseServ
    * This method sends `application/json` and handles request body of type `application/json`.
    */
   create$Response(params?: {
-    body?: NewGardenObjectSuggestion
-  }): Observable<StrictHttpResponse<GardenObjectSuggestion>> {
+    body?: API_NewGardenObjectSuggestion
+  }): Observable<StrictHttpResponse<API_GardenObjectSuggestion>> {
 
     const rb = new RequestBuilder(this.rootUrl, GardenObjectSuggestionsManagementControllerService.GardenObjectSuggestionsManagementControllerCreatePath, 'post');
     if (params) {
@@ -337,7 +337,7 @@ export class GardenObjectSuggestionsManagementControllerService extends BaseServ
     })).pipe(
       filter((r: any) => r instanceof HttpResponse),
       map((r: HttpResponse<any>) => {
-        return r as StrictHttpResponse<GardenObjectSuggestion>;
+        return r as StrictHttpResponse<API_GardenObjectSuggestion>;
       })
     );
   }
@@ -349,11 +349,11 @@ export class GardenObjectSuggestionsManagementControllerService extends BaseServ
    * This method sends `application/json` and handles request body of type `application/json`.
    */
   create(params?: {
-    body?: NewGardenObjectSuggestion
-  }): Observable<GardenObjectSuggestion> {
+    body?: API_NewGardenObjectSuggestion
+  }): Observable<API_GardenObjectSuggestion> {
 
     return this.create$Response(params).pipe(
-      map((r: StrictHttpResponse<GardenObjectSuggestion>) => r.body as GardenObjectSuggestion)
+      map((r: StrictHttpResponse<API_GardenObjectSuggestion>) => r.body as API_GardenObjectSuggestion)
     );
   }
 

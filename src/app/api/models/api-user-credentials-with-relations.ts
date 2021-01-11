@@ -4,7 +4,7 @@
 /**
  * (tsType: UserCredentialsWithRelations, schemaOptions: { includeRelations: true })
  */
-export interface UserCredentialsWithRelations {
+export interface API_UserCredentialsWithRelations {
   id?: string;
   password: string;
   userId: string;

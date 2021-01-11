@@ -2,14 +2,14 @@
 /* eslint-disable */
 
 /**
- * (tsType: GardenObjectWithRelations, schemaOptions: { includeRelations: true })
+ * (tsType: Partial<GardenObject>, schemaOptions: { partial: true })
  */
-export interface GardenObjectWithRelations {
+export interface API_GardenObjectPartial {
   description?: string;
   garden_category_ids?: Array<string>;
   garden_object_tasks?: Array<string>;
   id?: string;
   image?: string;
-  name: string;
+  name?: string;
   owned_count?: number;
 }

@@ -1,12 +1,12 @@
 /* tslint:disable */
 /* eslint-disable */
-import { UserCredentialsWithRelations } from './user-credentials-with-relations';
-import { UserGardenWithRelations } from './user-garden-with-relations';
+import { API_UserCredentialsWithRelations } from './api-user-credentials-with-relations';
+import { API_UserGardenWithRelations } from './api-user-garden-with-relations';
 
 /**
  * (tsType: UserWithRelations, schemaOptions: { includeRelations: true })
  */
-export interface UserWithRelations {
+export interface API_UserWithRelations {
   email: string;
   firstName?: string;
   id?: string;
@@ -17,6 +17,6 @@ export interface UserWithRelations {
   resetKeyTimestamp?: string;
   resetTimestamp?: string;
   roles?: Array<string>;
-  userCredentials?: UserCredentialsWithRelations;
-  user_gardens?: Array<UserGardenWithRelations>;
+  userCredentials?: API_UserCredentialsWithRelations;
+  user_gardens?: Array<API_UserGardenWithRelations>;
 }

@@ -2,12 +2,12 @@
 /* eslint-disable */
 
 /**
- * (tsType: GardenObjectSuggestionWithRelations, schemaOptions: { includeRelations: true })
+ * (tsType: Partial<GardenObjectSuggestion>, schemaOptions: { partial: true })
  */
-export interface GardenObjectSuggestionWithRelations {
+export interface API_GardenObjectSuggestionPartial {
   description?: string;
   garden_category_ids?: Array<string>;
   id?: string;
-  name: string;
+  name?: string;
   suggested_by_user_id?: string;
 }

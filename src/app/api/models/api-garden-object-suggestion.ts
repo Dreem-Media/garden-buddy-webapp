@@ -1,6 +1,6 @@
 /* tslint:disable */
 /* eslint-disable */
-export interface GardenObjectSuggestion {
+export interface API_GardenObjectSuggestion {
   description?: string;
   garden_category_ids?: Array<string>;
   id?: string;
