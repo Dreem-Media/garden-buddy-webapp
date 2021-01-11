@@ -1,6 +1,5 @@
 import { Observable, of, BehaviorSubject } from 'rxjs';
-import { GardenObject } from '../api/models';
-import { User } from '../api/models/user';
+import { User } from '../_models/_core/_users/user.model';
 
 export class UserServiceStub {
   hasRole(): boolean {
