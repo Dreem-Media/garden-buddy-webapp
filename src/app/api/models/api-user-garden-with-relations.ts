@@ -6,6 +6,7 @@ import { API_UserWithRelations } from './api-user-with-relations';
  * (tsType: UserGardenWithRelations, schemaOptions: { includeRelations: true })
  */
 export interface API_UserGardenWithRelations {
+  defaultGarden?: boolean;
   description?: string;
   id?: string;
   image?: string;

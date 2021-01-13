@@ -6,6 +6,7 @@ import { ApiConfiguration, ApiConfigurationParams } from './api-configuration';
 
 import { GardenObjectManagementControllerService } from './services/garden-object-management-controller.service';
 import { GardenObjectSuggestionsManagementControllerService } from './services/garden-object-suggestions-management-controller.service';
+import { UserGardenManagementControllerService } from './services/user-garden-management-controller.service';
 import { UserManagementControllerService } from './services/user-management-controller.service';
 
 /**
@@ -18,6 +19,7 @@ import { UserManagementControllerService } from './services/user-management-cont
   providers: [
     GardenObjectManagementControllerService,
     GardenObjectSuggestionsManagementControllerService,
+    UserGardenManagementControllerService,
     UserManagementControllerService,
     ApiConfiguration
   ],

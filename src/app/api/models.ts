@@ -6,11 +6,14 @@ export { API_GardenObjectSuggestion } from './models/api-garden-object-suggestio
 export { API_NewGardenObjectSuggestion } from './models/api-new-garden-object-suggestion';
 export { API_GardenObjectSuggestionWithRelations } from './models/api-garden-object-suggestion-with-relations';
 export { API_GardenObjectSuggestionPartial } from './models/api-garden-object-suggestion-partial';
-export { API_User } from './models/api-user';
-export { API_NewUser } from './models/api-new-user';
-export { API_UserGardenWithRelations } from './models/api-user-garden-with-relations';
+export { API_UserGarden } from './models/api-user-garden';
+export { API_NewUserGarden } from './models/api-new-user-garden';
 export { API_UserCredentialsWithRelations } from './models/api-user-credentials-with-relations';
 export { API_UserWithRelations } from './models/api-user-with-relations';
+export { API_UserGardenWithRelations } from './models/api-user-garden-with-relations';
+export { API_UserGardenPartial } from './models/api-user-garden-partial';
+export { API_User } from './models/api-user';
+export { API_NewUser } from './models/api-new-user';
 export { API_ResetPasswordInit } from './models/api-reset-password-init';
 export { API_KeyAndPassword } from './models/api-key-and-password';
 export { API_Count as LoopbackAPI_Count } from './models/loopback/api-count';
