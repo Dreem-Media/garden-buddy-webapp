@@ -3,18 +3,17 @@ import { GardenObjectManagementControllerService } from '../api/services';
 import { CoreHelpersService } from './core-helpers.service';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class GardenObjectsService {
-
   constructor(
     private apiGardenObjectService: GardenObjectManagementControllerService,
     private coreHelpers: CoreHelpersService
-  ) { }
+  ) {}
 
-  getGardenObjectsByOwnedCount() {
+  getGardenObjectsByOwnedCount(ignoreUserGardenOwned = false) {
     const params = this.coreHelpers.getSearchPaginationParams();
+    console.log('params', params);
     return this.apiGardenObjectService.find(params);
   }
-
 }

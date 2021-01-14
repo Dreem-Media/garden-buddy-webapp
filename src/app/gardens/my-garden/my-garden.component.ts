@@ -24,7 +24,7 @@ export class MyGardenComponent implements OnInit {
 
   getPopularGardenObjects(): void {
     this.gardenObjectsService
-      .getGardenObjectsByOwnedCount()
+      .getGardenObjectsByOwnedCount(true)
       .subscribe((allPopularObjects: GardenObject[]) => {
         this.popularGardenObjects = allPopularObjects;
         this.loadingService.loading = false;
