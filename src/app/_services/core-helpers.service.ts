@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { HttpParams } from '@angular/common/http';
 import { SearchFilterParams } from '../_models/_helpers/search-filter-params';
 
 @Injectable({
@@ -32,7 +31,7 @@ export class CoreHelpersService {
     return params;
   }
 
-  getSerachPaginationParams(
+  getSearchPaginationParams(
     page?: number,
     serachTerm?: string,
     searchType?: string
@@ -40,7 +39,7 @@ export class CoreHelpersService {
     const params: { filter: {} } = { filter: {} };
     let searchFilter = new SearchFilterParams();
     searchFilter = {
-      order: 'ownedCount DESC',
+      order: 'owned_count DESC',
       limit: this.itemsPerPage.toString(),
     };
     if (page) {

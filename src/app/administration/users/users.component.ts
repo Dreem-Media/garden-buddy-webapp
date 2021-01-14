@@ -47,7 +47,7 @@ export class UsersComponent implements OnInit {
     this.apiUserService.count(params).subscribe(
       (count: any) => {
         this.userCount = count.count;
-        const sendParams = this.coreHelpers.getSerachPaginationParams(
+        const sendParams = this.coreHelpers.getSearchPaginationParams(
           page,
           this.searchTerm,
           'user'

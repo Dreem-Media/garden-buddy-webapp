@@ -1,1 +1,16 @@
-<p>my-garden works!</p>
+<div class="py-5" [class.loading]="loadingService.loading">
+
+    <div class="text-center h1">
+        <i class="hut-icon hut-icon--large"></i>
+    </div>
+
+    <h1 class="text-uppercase">Welcome to your garden, {{ userService.currentUser?.firstName }}</h1>
+
+    <p>This is where you can add and remove the plants & items you currently have in your garden.</p>
+    <p class="mb-5">We will send you timely tasks and reminds for each item in your garden, to help you keep on top of
+        things come rain of shine.</p>
+
+        <h2>Popular</h2>
+        <pre>{{ popularGardenObjects | json }}</pre>
+
+</div>

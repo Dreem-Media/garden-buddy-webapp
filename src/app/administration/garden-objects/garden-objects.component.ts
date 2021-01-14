@@ -60,7 +60,7 @@ export class GardenObjectsComponent implements OnInit {
     const params = this.coreHelpers.getCountParams(this.searchTerm, 'user');
     this.apiGardenObjectService.count(params).subscribe((count: any) => {
       this.gardenObjectsCount = count.count;
-      const sendParams = this.coreHelpers.getSerachPaginationParams(
+      const sendParams = this.coreHelpers.getSearchPaginationParams(
         page,
         this.searchTerm,
         'garden'
@@ -76,7 +76,7 @@ export class GardenObjectsComponent implements OnInit {
 
   getSuggestions(page?: number) {
     this.loadingService.loading = true;
-    const params = this.coreHelpers.getSerachPaginationParams(page);
+    const params = this.coreHelpers.getSearchPaginationParams(page);
     this.apiGardenSuggestionService
       .find(params)
       .subscribe((suggestionData: GardenObjectSuggestion[]) => {
