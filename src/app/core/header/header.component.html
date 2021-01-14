@@ -6,7 +6,7 @@
         <ng-container *ngIf="!resetMode">
 
         <a mat-button class="nav-item nav-link" *ngIf="currentUserToken" routerLink="/">Garden Tasks</a>
-        <a mat-button class="nav-item nav-link" *ngIf="currentUserToken" routerLink="/my-garden">My Garden</a>
+        <a mat-button class="nav-item nav-link" *ngIf="currentUserToken" routerLink="/gardens">My Garden</a>
         
         <button mat-button [matMenuTriggerFor]="adminmenu" *ngIf="userService.hasRole('garden-admin')">Admin</button>
         <mat-menu #adminmenu="matMenu">

@@ -6,6 +6,7 @@ import { LoginRegisterComponent } from './core/login-register/login-register.com
 import { PasswordResetFormComponent } from './core/password-reset-form/password-reset-form.component';
 import { TermsComponent } from './core/terms/terms.component';
 import { WelcomeComponent } from './core/welcome/welcome.component';
+import { AuthGuard } from './_helpers/auth.guard';
 
 const routes: Routes = [
   {
@@ -16,8 +17,6 @@ const routes: Routes = [
   { path: 'login', component: LoginRegisterComponent },
   { path: 'reset-password', component: PasswordResetFormComponent },
   { path: 'terms', component: TermsComponent },
-  { path: 'error', component: ErrorComponent },
-
   {
     path: 'administration',
     loadChildren: () =>
@@ -25,6 +24,12 @@ const routes: Routes = [
         (mod) => mod.AdministrationModule
       ),
   },
+  {
+    path: 'gardens',
+    loadChildren: () => import('./gardens/gardens.module').then(m => m.GardensModule),
+    canActivate: [AuthGuard]
+  },
+  { path: 'error', component: ErrorComponent },
   { path: '**', redirectTo: '/error' },
 ];
 
@@ -32,4 +37,4 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }
