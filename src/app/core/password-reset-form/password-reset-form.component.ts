@@ -21,9 +21,10 @@ export class PasswordResetFormComponent implements OnInit {
 
   onPasswordChangeRequest(): void {
     this.formModel.resetKey = this.route.snapshot.queryParamMap.get('resetKey');
-    console.log('this.formModel', this.formModel);
-    this.apiUserService.resetPasswordFinish({ body: this.formModel }).subscribe(() => {
-      this.alerts.sendMessage('Password Reset Complete');
-    });
+    this.apiUserService
+      .resetPasswordFinish({ body: this.formModel })
+      .subscribe(() => {
+        this.alerts.sendMessage('Password Reset Complete');
+      });
   }
 }

@@ -16,18 +16,10 @@ export class RouterStub {
 export class AlertsServiceStub {}
 
 export class AuthenticationServiceStub {
-  private currentUserTokenSubject: BehaviorSubject<User>;
-  public currentUserToken: Observable<User>;
-  private isResetModeSubject: BehaviorSubject<boolean>;
-  public isResetMode: Observable<boolean>;
+  private currentUserTokenSubject: BehaviorSubject<string>;
   constructor() {
     const userToken = sessionStorage.getItem('currentUser');
-    this.currentUserTokenSubject = new BehaviorSubject<User>(
-      userToken && JSON.parse(userToken)
-    );
-    this.currentUserToken = this.currentUserTokenSubject.asObservable();
-    this.isResetModeSubject = new BehaviorSubject<boolean>(false);
-    this.isResetMode = this.isResetModeSubject.asObservable();
+    this.currentUserTokenSubject = new BehaviorSubject<string>('');
   }
   public get currentUserValue(): {} {
     return { token: '' };

@@ -14,11 +14,13 @@ export class AuthenticationService {
     private userService: UserService,
     private apiUserService: UserManagementControllerService
   ) {
-    const sessionUser = localStorage.getItem('currentUserToken');
-    this.currentUserSubject = new BehaviorSubject<string>(
-      sessionUser && JSON.parse(sessionUser)
-    );
+    this.currentUserSubject = new BehaviorSubject<string>('');
     this.currentUser = this.currentUserSubject.asObservable();
+
+    const sessionUser = sessionStorage.getItem('currentUserToken');
+    if (sessionUser) {
+      this.currentUserSubject.next(JSON.parse(sessionUser));
+    }
   }
 
   public get currentUserValue(): string {
@@ -32,8 +34,11 @@ export class AuthenticationService {
     return this.apiUserService.login(params).pipe(
       map((token) => {
         // store user details and jwt token in local storage to keep user logged in between page refreshes
-        sessionStorage.setItem('currentUserToken', JSON.stringify(token));
         if (token.token) {
+          sessionStorage.setItem(
+            'currentUserToken',
+            JSON.stringify(token.token)
+          );
           this.currentUserSubject.next(token.token);
         }
         this.apiUserService.printCurrentUser().subscribe((data) => {
@@ -46,7 +51,7 @@ export class AuthenticationService {
 
   logout(): void {
     // remove user from local storage to log user out
-    localStorage.removeItem('currentUserToken');
+    sessionStorage.removeItem('currentUserToken');
     this.userService.removeUser();
     this.currentUserSubject.next('');
   }
