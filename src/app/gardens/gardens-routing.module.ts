@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { GardenResolver } from './garden.resolver';
 import { MyGardenComponent } from './my-garden/my-garden.component';
 
 const routes: Routes = [
@@ -8,7 +9,20 @@ const routes: Routes = [
     redirectTo: 'mine',
     pathMatch: 'full'
   },
-  { path: 'mine', component: MyGardenComponent },
+  {
+    path: 'mine',
+    component: MyGardenComponent,
+    resolve: {
+      garden: GardenResolver
+    }
+  },
+  {
+    path: ':id',
+    component: MyGardenComponent,
+    resolve: {
+      garden: GardenResolver
+    }
+  },
 ];
 
 @NgModule({

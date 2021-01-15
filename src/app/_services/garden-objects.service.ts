@@ -13,7 +13,6 @@ export class GardenObjectsService {
 
   getGardenObjectsByOwnedCount(ignoreUserGardenOwned = false) {
     const params = this.coreHelpers.getSearchPaginationParams();
-    console.log('params', params);
     return this.apiGardenObjectService.find(params);
   }
 }
