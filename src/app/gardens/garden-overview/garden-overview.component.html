@@ -21,7 +21,37 @@
     </ng-container>
   </div>
 
+  <div class="my-garden--owned">
+    <p *ngIf="!userGardenObjects?.length" class="my-4">You do not have any items in your Garden, add some below</p>
+
+    <!-- Move into its own component? -->
+    <div class="row mt-4">
+      <div *ngFor="let item of userGardenObjects" class="col-6 col-lg-3">
+        <mat-card class="mb-2">
+          <mat-card-header>
+            <mat-card-title>{{ item.title }}</mat-card-title>
+          </mat-card-header>
+          <mat-card-content *ngIf="item.description">
+            <p>{{ item.description }}</p>
+          </mat-card-content>
+          <mat-card-content *ngIf="item.gardenTasks.length">
+            <p>Has {{ item.gardenTasks.length }} tasks, including: <em>{{ item.gardenTasks[0].title }}</em></p>
+          </mat-card-content>
+          <mat-card-actions>
+            <button mat-button color="warn" (click)="removeItemFromUserGarden(item)">
+              Remove from Garden
+              <mat-icon>remove_circle</mat-icon>
+            </button>
+          </mat-card-actions>
+        </mat-card>
+      </div>
+    </div>
+
+  </div>
+
   <h2>User Garden</h2>
   <pre>{{ userGarden | json }}</pre>
+  <h2>User Garden Objects</h2>
+  <pre>{{ userGardenObjects | json }}</pre>
 
 </div>

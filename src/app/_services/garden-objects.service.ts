@@ -9,10 +9,10 @@ export class GardenObjectsService {
   constructor(
     private apiGardenObjectService: GardenObjectManagementControllerService,
     private coreHelpers: CoreHelpersService
-  ) {}
+  ) { }
 
-  getGardenObjectsByOwnedCount(ignoreUserGardenOwned = false) {
-    const params = this.coreHelpers.getSearchPaginationParams();
+  getGardenObjectsByOwnedCount(ignoreUserGardenOwnedIds?: string[]) {
+    const params = this.coreHelpers.getSearchPaginationParams(undefined, undefined, undefined, ignoreUserGardenOwnedIds);
     return this.apiGardenObjectService.find(params);
   }
 }

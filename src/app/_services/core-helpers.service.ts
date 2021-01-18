@@ -34,18 +34,24 @@ export class CoreHelpersService {
   getSearchPaginationParams(
     page?: number,
     serachTerm?: string,
-    searchType?: string
+    searchType?: string,
+    ignoreUserGardenOwnedIds?: string[]
   ): { filter: {} } {
-    const params: { filter: {} } = { filter: {} };
+
+    const params: { filter: SearchFilterParams | string } = { filter: {} };
+
     let searchFilter = new SearchFilterParams();
+
     searchFilter = {
       order: 'owned_count DESC',
       limit: this.itemsPerPage.toString(),
     };
+
     if (page) {
       const offset = (page - 1) * this.itemsPerPage;
       searchFilter.skip = offset.toString();
     }
+
     if (serachTerm && serachTerm.length) {
       if (searchType === 'user') {
         searchFilter.where = {
@@ -64,7 +70,13 @@ export class CoreHelpersService {
         };
       }
     }
+
+    if (ignoreUserGardenOwnedIds) {
+      searchFilter.where = { "id": { "nin": ignoreUserGardenOwnedIds } }
+    }
+
     params.filter = JSON.stringify(searchFilter);
+
     return params;
   }
 }

@@ -17,6 +17,7 @@ export class GardenOverviewComponent implements OnInit {
   public userGarden: API_UserGarden;
 
   public popularGardenObjects: GardenObject[] = [];
+  public userGardenObjects: GardenObject[] = [];
 
   public searchGardenObjectsCtrl = new FormControl();
 
@@ -34,15 +35,24 @@ export class GardenOverviewComponent implements OnInit {
 
   ngOnInit(): void {
     this.getPopularGardenObjects();
+    this.getOwnedUserGardenItems();
   }
 
   private getPopularGardenObjects(): void {
     this.gardenObjectsService
-      .getGardenObjectsByOwnedCount(true)
+      .getGardenObjectsByOwnedCount(this.userGarden.owned_garden_objects)
       .subscribe((allPopularObjects: GardenObject[]) => {
         this.popularGardenObjects = allPopularObjects;
         this.loadingService.loading = false;
       }, () => this.loadingService.loading = false)
+  }
+
+  private getOwnedUserGardenItems(): void {
+    this.loadingService.loading = true;
+    this.userGardenService.getOwnedUserGardenItems(this.userGarden.id!)
+      .subscribe(data => {
+        this.userGardenObjects = data;
+      })
   }
 
   public addItemToUserGarden(
@@ -52,6 +62,7 @@ export class GardenOverviewComponent implements OnInit {
     this.loadingService.loading = true;
     this.userGardenService.addOwnedItemToGarden(this.userGarden.id!, gardenObject.id!).subscribe(
       () => {
+        this.userGarden.owned_garden_objects?.push(gardenObject.id!);
         if (removeFromInput) {
           this.searchGardenObjectsCtrl.setValue("");
         }
@@ -60,6 +71,10 @@ export class GardenOverviewComponent implements OnInit {
       },
       () => (this.loadingService.loading = false)
     );
+  }
+
+  public removeItemFromUserGarden(gardenObject: GardenObject) {
+
   }
 
 }

@@ -15,6 +15,10 @@ export class UserGardenService {
         return this.apiUserGardenService.findById({ id });
     }
 
+    public getOwnedUserGardenItems(id: string) {
+        return this.apiUserGardenService.getOwnedUserGardenItems({ id });
+    }
+
     public addOwnedItemToGarden(userGardenId: string, gardenObjectId: string): Observable<void> {
         return this.apiUserGardenService.addOwnedItemToGarden(
             {
