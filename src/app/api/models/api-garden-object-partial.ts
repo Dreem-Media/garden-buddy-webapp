@@ -7,7 +7,6 @@
 export interface API_GardenObjectPartial {
   description?: string;
   garden_category_ids?: Array<string>;
-  garden_object_tasks?: Array<string>;
   id?: string;
   image?: string;
   name?: string;

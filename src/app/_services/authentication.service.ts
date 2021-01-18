@@ -41,7 +41,7 @@ export class AuthenticationService {
           );
           this.currentUserSubject.next(token.token);
         }
-        this.apiUserService.printCurrentUser().subscribe((data) => {
+        this.apiUserService.getCurrentUserDetails().subscribe((data) => {
           this.userService.currentUser = data as User;
           return data;
         });

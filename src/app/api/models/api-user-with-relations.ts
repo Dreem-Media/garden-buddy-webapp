@@ -19,4 +19,5 @@ export interface API_UserWithRelations {
   roles?: Array<string>;
   userCredentials?: API_UserCredentialsWithRelations;
   user_gardens?: Array<API_UserGardenWithRelations>;
+  verified?: boolean;
 }

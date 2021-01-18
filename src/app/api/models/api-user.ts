@@ -11,4 +11,5 @@ export interface API_User {
   resetKeyTimestamp?: string;
   resetTimestamp?: string;
   roles?: Array<string>;
+  verified?: boolean;
 }

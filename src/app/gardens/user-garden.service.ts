@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 import { UserGardenManagementControllerService } from '../api/services';
-import { CoreHelpersService } from '../_services/core-helpers.service';
 
 @Injectable({
     providedIn: 'root'
@@ -11,7 +11,16 @@ export class UserGardenService {
         private apiUserGardenService: UserGardenManagementControllerService
     ) { }
 
-    getUserGarden(id: string) {
+    public getUserGarden(id: string) {
         return this.apiUserGardenService.findById({ id });
+    }
+
+    public addOwnedItemToGarden(userGardenId: string, gardenObjectId: string): Observable<void> {
+        return this.apiUserGardenService.addOwnedItemToGarden(
+            {
+                id: userGardenId,
+                body: { gardenObjectId }
+            }
+        );
     }
 }

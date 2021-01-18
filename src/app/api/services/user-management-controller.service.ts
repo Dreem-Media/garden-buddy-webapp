@@ -182,20 +182,20 @@ export class UserManagementControllerService extends BaseService {
   }
 
   /**
-   * Path part for operation userManagementControllerPrintCurrentUser
+   * Path part for operation userManagementControllerGetCurrentUserDetails
    */
-  static readonly UserManagementControllerPrintCurrentUserPath = '/users/me';
+  static readonly UserManagementControllerGetCurrentUserDetailsPath = '/users/me';
 
   /**
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `printCurrentUser()` instead.
+   * To access only the response body, use `getCurrentUserDetails()` instead.
    *
    * This method doesn't expect any request body.
    */
-  printCurrentUser$Response(params?: {
+  getCurrentUserDetails$Response(params?: {
   }): Observable<StrictHttpResponse<{ 'id': string, 'email'?: string, 'name'?: string }>> {
 
-    const rb = new RequestBuilder(this.rootUrl, UserManagementControllerService.UserManagementControllerPrintCurrentUserPath, 'get');
+    const rb = new RequestBuilder(this.rootUrl, UserManagementControllerService.UserManagementControllerGetCurrentUserDetailsPath, 'get');
     if (params) {
     }
 
@@ -212,14 +212,14 @@ export class UserManagementControllerService extends BaseService {
 
   /**
    * This method provides access to only to the response body.
-   * To access the full response (for headers, for example), `printCurrentUser$Response()` instead.
+   * To access the full response (for headers, for example), `getCurrentUserDetails$Response()` instead.
    *
    * This method doesn't expect any request body.
    */
-  printCurrentUser(params?: {
+  getCurrentUserDetails(params?: {
   }): Observable<{ 'id': string, 'email'?: string, 'name'?: string }> {
 
-    return this.printCurrentUser$Response(params).pipe(
+    return this.getCurrentUserDetails$Response(params).pipe(
       map((r: StrictHttpResponse<{ 'id': string, 'email'?: string, 'name'?: string }>) => r.body as { 'id': string, 'email'?: string, 'name'?: string })
     );
   }

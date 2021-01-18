@@ -5,8 +5,11 @@ import { HttpClient } from '@angular/common/http';
 import { ApiConfiguration, ApiConfigurationParams } from './api-configuration';
 
 import { GardenObjectManagementControllerService } from './services/garden-object-management-controller.service';
+import { GardenObjectTaskLinkControllerService } from './services/garden-object-task-link-controller.service';
+import { GardenTaskManagementControllerService } from './services/garden-task-management-controller.service';
 import { GardenObjectSuggestionsManagementControllerService } from './services/garden-object-suggestions-management-controller.service';
 import { UserGardenManagementControllerService } from './services/user-garden-management-controller.service';
+import { UserGardenUserGardenTodoItemControllerService } from './services/user-garden-user-garden-todo-item-controller.service';
 import { UserManagementControllerService } from './services/user-management-controller.service';
 
 /**
@@ -18,8 +21,11 @@ import { UserManagementControllerService } from './services/user-management-cont
   declarations: [],
   providers: [
     GardenObjectManagementControllerService,
+    GardenObjectTaskLinkControllerService,
+    GardenTaskManagementControllerService,
     GardenObjectSuggestionsManagementControllerService,
     UserGardenManagementControllerService,
+    UserGardenUserGardenTodoItemControllerService,
     UserManagementControllerService,
     ApiConfiguration
   ],

@@ -9,6 +9,7 @@ import { RequestBuilder } from '../request-builder';
 import { Observable } from 'rxjs';
 import { map, filter } from 'rxjs/operators';
 
+import { API_GardenObjectWithRelations } from '../models/api-garden-object-with-relations';
 import { API_NewUserGarden } from '../models/api-new-user-garden';
 import { API_UserGarden } from '../models/api-user-garden';
 import { API_UserGardenPartial } from '../models/api-user-garden-partial';
@@ -23,6 +24,153 @@ export class UserGardenManagementControllerService extends BaseService {
     http: HttpClient
   ) {
     super(config, http);
+  }
+
+  /**
+   * Path part for operation userGardenManagementControllerDeleteOwnedItemToGarden
+   */
+  static readonly UserGardenManagementControllerDeleteOwnedItemToGardenPath = '/user-gardens/{id}/owned-items/{gardenObjectId}';
+
+  /**
+   * This method provides access to the full `HttpResponse`, allowing access to response headers.
+   * To access only the response body, use `deleteOwnedItemToGarden()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  deleteOwnedItemToGarden$Response(params: {
+    id: string;
+    gardenObjectId: string;
+  }): Observable<StrictHttpResponse<void>> {
+
+    const rb = new RequestBuilder(this.rootUrl, UserGardenManagementControllerService.UserGardenManagementControllerDeleteOwnedItemToGardenPath, 'delete');
+    if (params) {
+      rb.path('id', params.id, {});
+      rb.path('gardenObjectId', params.gardenObjectId, {});
+    }
+
+    return this.http.request(rb.build({
+      responseType: 'text',
+      accept: '*/*'
+    })).pipe(
+      filter((r: any) => r instanceof HttpResponse),
+      map((r: HttpResponse<any>) => {
+        return (r as HttpResponse<any>).clone({ body: undefined }) as StrictHttpResponse<void>;
+      })
+    );
+  }
+
+  /**
+   * This method provides access to only to the response body.
+   * To access the full response (for headers, for example), `deleteOwnedItemToGarden$Response()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  deleteOwnedItemToGarden(params: {
+    id: string;
+    gardenObjectId: string;
+  }): Observable<void> {
+
+    return this.deleteOwnedItemToGarden$Response(params).pipe(
+      map((r: StrictHttpResponse<void>) => r.body as void)
+    );
+  }
+
+  /**
+   * Path part for operation userGardenManagementControllerGetOwnedUserGardenItems
+   */
+  static readonly UserGardenManagementControllerGetOwnedUserGardenItemsPath = '/user-gardens/{id}/owned-items';
+
+  /**
+   * This method provides access to the full `HttpResponse`, allowing access to response headers.
+   * To access only the response body, use `getOwnedUserGardenItems()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  getOwnedUserGardenItems$Response(params: {
+    id: string;
+    filter?: any;
+  }): Observable<StrictHttpResponse<Array<API_GardenObjectWithRelations>>> {
+
+    const rb = new RequestBuilder(this.rootUrl, UserGardenManagementControllerService.UserGardenManagementControllerGetOwnedUserGardenItemsPath, 'get');
+    if (params) {
+      rb.path('id', params.id, {});
+      rb.query('filter', params.filter, {});
+    }
+
+    return this.http.request(rb.build({
+      responseType: 'json',
+      accept: 'application/json'
+    })).pipe(
+      filter((r: any) => r instanceof HttpResponse),
+      map((r: HttpResponse<any>) => {
+        return r as StrictHttpResponse<Array<API_GardenObjectWithRelations>>;
+      })
+    );
+  }
+
+  /**
+   * This method provides access to only to the response body.
+   * To access the full response (for headers, for example), `getOwnedUserGardenItems$Response()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  getOwnedUserGardenItems(params: {
+    id: string;
+    filter?: any;
+  }): Observable<Array<API_GardenObjectWithRelations>> {
+
+    return this.getOwnedUserGardenItems$Response(params).pipe(
+      map((r: StrictHttpResponse<Array<API_GardenObjectWithRelations>>) => r.body as Array<API_GardenObjectWithRelations>)
+    );
+  }
+
+  /**
+   * Path part for operation userGardenManagementControllerAddOwnedItemToGarden
+   */
+  static readonly UserGardenManagementControllerAddOwnedItemToGardenPath = '/user-gardens/{id}/owned-items';
+
+  /**
+   * This method provides access to the full `HttpResponse`, allowing access to response headers.
+   * To access only the response body, use `addOwnedItemToGarden()` instead.
+   *
+   * This method sends `application/json` and handles request body of type `application/json`.
+   */
+  addOwnedItemToGarden$Response(params: {
+    id: string;
+    body?: any
+  }): Observable<StrictHttpResponse<void>> {
+
+    const rb = new RequestBuilder(this.rootUrl, UserGardenManagementControllerService.UserGardenManagementControllerAddOwnedItemToGardenPath, 'post');
+    if (params) {
+      rb.path('id', params.id, {});
+      rb.body(params.body, 'application/json');
+    }
+
+    return this.http.request(rb.build({
+      responseType: 'text',
+      accept: '*/*'
+    })).pipe(
+      filter((r: any) => r instanceof HttpResponse),
+      map((r: HttpResponse<any>) => {
+        return (r as HttpResponse<any>).clone({ body: undefined }) as StrictHttpResponse<void>;
+      })
+    );
+  }
+
+  /**
+   * This method provides access to only to the response body.
+   * To access the full response (for headers, for example), `addOwnedItemToGarden$Response()` instead.
+   *
+   * This method sends `application/json` and handles request body of type `application/json`.
+   */
+  addOwnedItemToGarden(params: {
+    id: string;
+    body?: any
+  }): Observable<void> {
+
+    return this.addOwnedItemToGarden$Response(params).pipe(
+      map((r: StrictHttpResponse<void>) => r.body as void)
+    );
   }
 
   /**
