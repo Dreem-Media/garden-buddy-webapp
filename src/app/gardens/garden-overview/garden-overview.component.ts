@@ -7,10 +7,10 @@ import { LoadingService } from 'src/app/_services/loading.service';
 import { UserService } from 'src/app/_services/user.service';
 
 @Component({
-  selector: 'app-my-garden',
-  templateUrl: './my-garden.component.html'
+  selector: 'app-garden-overview',
+  templateUrl: './garden-overview.component.html'
 })
-export class MyGardenComponent implements OnInit {
+export class GardenOverviewComponent implements OnInit {
 
   public userGarden: API_UserGarden;
 

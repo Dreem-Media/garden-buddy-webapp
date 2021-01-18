@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { GardenResolver } from './garden.resolver';
-import { MyGardenComponent } from './my-garden/my-garden.component';
+import { GardenOverviewComponent } from './garden-overview/garden-overview.component';
 
 const routes: Routes = [
   {
@@ -11,14 +11,14 @@ const routes: Routes = [
   },
   {
     path: 'mine',
-    component: MyGardenComponent,
+    component: GardenOverviewComponent,
     resolve: {
       garden: GardenResolver
     }
   },
   {
     path: ':id',
-    component: MyGardenComponent,
+    component: GardenOverviewComponent,
     resolve: {
       garden: GardenResolver
     }
