@@ -1,5 +1,5 @@
 /* You can add global styles to this file, and also import other style files */
-@use '~@angular/material' as mat;
+@use '@angular/material' as mat;
 
 $primary: #3f814b;
 $dark-primary-text: #252525;
@@ -22,7 +22,7 @@ $light-primary-text: white;
 @import "../node_modules/bootstrap/scss/type";
 @import "../node_modules/bootstrap/scss/utilities";
 
-@import "~@angular/material/theming";
+@import "@angular/material/theming";
 @include mat.core();
 
 body {
