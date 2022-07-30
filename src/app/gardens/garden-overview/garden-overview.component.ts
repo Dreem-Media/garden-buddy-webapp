@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { UntypedFormControl } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { API_UserGarden } from 'src/app/api/models';
 import { GardenObject } from 'src/app/_models/_core/_garden/garden-object';
@@ -19,7 +19,7 @@ export class GardenOverviewComponent implements OnInit {
   public popularGardenObjects: GardenObject[] = [];
   public userGardenObjects: GardenObject[] = [];
 
-  public searchGardenObjectsCtrl = new FormControl();
+  public searchGardenObjectsCtrl = new UntypedFormControl();
 
   constructor(
     private gardenObjectsService: GardenObjectsService,

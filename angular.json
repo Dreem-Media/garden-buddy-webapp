@@ -125,7 +125,6 @@
       }
     }
   },
-  "defaultProject": "garden-buddy-webapp",
   "cli": {
     "analytics": "38f2a49f-cd50-47d1-becc-6fdd1443dd3e"
   }
