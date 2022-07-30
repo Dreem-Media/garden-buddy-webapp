@@ -27,34 +27,33 @@ import { PasswordResetFormComponent } from './core/password-reset-form/password-
 import { TermsComponent } from './core/terms/terms.component';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    LoginRegisterComponent,
-    HeaderComponent,
-    ErrorComponent,
-    ConfirmationDialogComponent,
-    WelcomeComponent,
-    PasswordResetFormComponent,
-    TermsComponent,
-    FooterComponent,
-  ],
-  imports: [
-    BrowserModule,
-    BrowserAnimationsModule,
-    AppRoutingModule,
-    ServiceWorkerModule.register('ngsw-worker.js', {
-      enabled: environment.production,
-    }),
-    FormsModule,
-    ReactiveFormsModule,
-    HttpClientModule,
-    MaterialModules,
-  ],
-  providers: [
-    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
-    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
-  ],
-  bootstrap: [AppComponent],
-  entryComponents: [ConfirmationDialogComponent],
+    declarations: [
+        AppComponent,
+        LoginRegisterComponent,
+        HeaderComponent,
+        ErrorComponent,
+        ConfirmationDialogComponent,
+        WelcomeComponent,
+        PasswordResetFormComponent,
+        TermsComponent,
+        FooterComponent,
+    ],
+    imports: [
+        BrowserModule,
+        BrowserAnimationsModule,
+        AppRoutingModule,
+        ServiceWorkerModule.register('ngsw-worker.js', {
+            enabled: environment.production,
+        }),
+        FormsModule,
+        ReactiveFormsModule,
+        HttpClientModule,
+        MaterialModules,
+    ],
+    providers: [
+        { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+        { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+    ],
+    bootstrap: [AppComponent]
 })
 export class AppModule {}
