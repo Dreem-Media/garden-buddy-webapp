@@ -34,8 +34,8 @@
           <mat-card-content *ngIf="item.description">
             <p>{{ item.description }}</p>
           </mat-card-content>
-          <mat-card-content *ngIf="item.gardenTasks.length">
-            <p>Has {{ item.gardenTasks.length }} tasks, including: <em>{{ item.gardenTasks[0].title }}</em></p>
+          <mat-card-content *ngIf="item.gardenTasks?.length">
+            <p>Has {{ item.gardenTasks?.length }} tasks, including: <em>{{ item.gardenTasks![0].title }}</em></p>
           </mat-card-content>
           <mat-card-actions>
             <button mat-button color="warn" (click)="removeItemFromUserGarden(item)">
